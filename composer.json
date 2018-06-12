@@ -1,0 +1,27 @@
+{
+    "name": "alexmaestre/factum",
+    "description": "Factum is a Billing Manager build on top of Laravel",
+    "authors": [
+        {
+            "name": "Alex Maestre",
+            "email": "contacto@vivazzio.com"
+        }
+    ],
+	"require": {
+		"php": ">=7.0.0",
+		"alexmaestre/vivacms" : "*"
+    },
+    "autoload": {
+        "psr-4": {
+		"Factum\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+		"laravel": {
+			"providers": [
+				"Factum\\Providers\\FactumServiceProvider"
+			]
+        }
+    }
+}
