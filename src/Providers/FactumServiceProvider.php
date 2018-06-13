@@ -1,6 +1,7 @@
 <?php
 namespace Factum\Providers;
 
+use App;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use VivaCMS\Services\Routing\RoutingManager;
 
@@ -31,6 +32,7 @@ class FactumServiceProvider extends ServiceProvider
 			$path = __DIR__.'/../../resources/routes/'.$layer->router.'.php';
 			if(file_exists($path)){ $this->loadRoutesFrom($path); }		
 		}
+		
         parent::boot();
     }
 	

@@ -3,7 +3,7 @@
 namespace Factum\Console;
 
 use Illuminate\Console\Command;
-use VivaCMS\Managers\Installation\InstallationManager;
+use VivaCMS\Services\Installation\InstallationManager;
 
 class UninstallCommand extends Command
 {

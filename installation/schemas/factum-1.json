@@ -1,0 +1,159 @@
+{
+	"code": "factum",
+	"version" : 1,
+	"description" : "Factum Tables",
+    "tables": [
+		{
+			"name" : "companies",
+			"engine" : "InnoDB",
+			"columns" :  
+				[
+					{
+						"name" : "id",
+						"type" : "mediumIncrements"
+					},
+					{
+						"name" : "user_id",
+						"type" : "integer",
+						"nullable" : true
+					},
+					{
+						"name" : "reference",
+						"type" : "string",
+						"size" : 128
+					},
+					{
+						"name" : "email",
+						"type" : "string",
+						"size" : 128
+					},
+					{
+						"name" : "telephone",
+						"type" : "integer",
+						"size" : 12
+					},
+					{
+						"name" : "tax_name",
+						"type" : "string",
+						"size" : 60
+					},
+					{
+						"name" : "tax_code",
+						"type" : "string",
+						"size" : 20
+					},
+					{
+						"name" : "tax_address",
+						"type" : "string",
+						"size" : 20
+					},
+					{
+						"name" : "tax_id",
+						"type" : "integer",
+						"size" : 12
+					},
+					{
+						"name" : "city_id",
+						"type" : "integer",
+						"nullable" : true
+					},
+					{
+						"name" : "postal_code_id",
+						"type" : "integer",
+						"nullable" : true
+					}					
+				],
+			"timestamps" : true,
+			"foreign_key" : [["user_id","id","users"],["city_id","id","geo_cities"],["postal_code_id","id","geo_postal_codes"]]
+		},
+		{
+			"name" : "company_providers",
+			"engine" : "InnoDB",
+			"columns" :  
+				[
+					{
+						"name" : "id",
+						"type" : "mediumIncrements"
+					},
+					{
+						"name" : "company_id",
+						"type" : "mediumInteger"
+					},
+					{
+						"name" : "provider_id",
+						"type" : "mediumInteger"
+					}				
+				],
+			"timestamps" : false,
+			"foreign_key" : [["company_id","id","companies"],["provider_id","id","companies"]]
+		},
+		{
+			"name" : "bills",
+			"engine" : "InnoDB",
+			"columns" :  
+				[
+					{
+						"name" : "id",
+						"type" : "mediumIncrements"
+					},
+					{
+						"name" : "from",
+						"type" : "mediumInteger"
+					},
+					{
+						"name" : "to",
+						"type" : "mediumInteger"
+					},
+					{
+						"name" : "base",
+						"type" : "decimal",
+						"size" : 10,
+						"decimals" : 4
+					},
+					{
+						"name" : "taxes",
+						"type" : "decimal",
+						"size" : 10,
+						"decimals" : 4
+					},
+					{
+						"name" : "total",
+						"type" : "mediumInteger",
+						"type" : "decimal",
+						"size" : 10,
+						"decimals" : 4
+					},
+					{
+						"name" : "status",
+						"type" : "boolean",
+						"default" : 1
+					}				
+				],
+			"timestamps" : false,
+			"foreign_key" : [["from","id","companies"],["to","id","companies"]]
+		},
+		{
+			"name" : "bill_items",
+			"engine" : "InnoDB",
+			"columns" :  
+				[
+					{
+						"name" : "id",
+						"type" : "mediumIncrements"
+					},
+					{
+						"name" : "bill_id",
+						"type" : "mediumInteger"
+					},
+					{
+						"name" : "base",
+						"type" : "decimal",
+						"size" : 10,
+						"decimals" : 4
+					}				
+				],
+			"timestamps" : false,
+			"foreign_key" : [["bill_id","id","bills"]]
+		}
+	]
+}
