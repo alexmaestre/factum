@@ -25,32 +25,30 @@
 					{
 						"name" : "email",
 						"type" : "string",
-						"size" : 128
+						"size" : 128,
+						"nullable" : true
 					},
 					{
 						"name" : "telephone",
 						"type" : "integer",
-						"size" : 12
+						"size" : 12,
+						"nullable" : true
 					},
 					{
-						"name" : "tax_name",
+						"name" : "name",
 						"type" : "string",
-						"size" : 60
+						"size" : 64,
+						"maxlength" : 64
 					},
 					{
-						"name" : "tax_code",
+						"name" : "code",
 						"type" : "string",
-						"size" : 20
+						"size" : 64
 					},
 					{
-						"name" : "tax_address",
+						"name" : "address",
 						"type" : "string",
-						"size" : 20
-					},
-					{
-						"name" : "tax_id",
-						"type" : "integer",
-						"size" : 12
+						"size" : 128
 					},
 					{
 						"name" : "city_id",
@@ -61,13 +59,18 @@
 						"name" : "postal_code_id",
 						"type" : "integer",
 						"nullable" : true
+					},
+					{
+						"name" : "tax_id",
+						"type" : "integer",
+						"size" : 12
 					}					
 				],
 			"timestamps" : true,
 			"foreign_key" : [["user_id","id","users"],["city_id","id","geo_cities"],["postal_code_id","id","geo_postal_codes"]]
 		},
 		{
-			"name" : "company_providers",
+			"name" : "company_customers",
 			"engine" : "InnoDB",
 			"columns" :  
 				[
@@ -80,15 +83,15 @@
 						"type" : "mediumInteger"
 					},
 					{
-						"name" : "provider_id",
+						"name" : "customer_company_id",
 						"type" : "mediumInteger"
 					}				
 				],
 			"timestamps" : false,
-			"foreign_key" : [["company_id","id","companies"],["provider_id","id","companies"]]
+			"foreign_key" : [["company_id","id","companies"],["customer_company_id","id","companies"]]
 		},
 		{
-			"name" : "bills",
+			"name" : "invoices",
 			"engine" : "InnoDB",
 			"columns" :  
 				[
@@ -97,12 +100,22 @@
 						"type" : "mediumIncrements"
 					},
 					{
-						"name" : "from",
+						"name" : "company_id",
 						"type" : "mediumInteger"
 					},
 					{
-						"name" : "to",
+						"name" : "receiver_company_id",
 						"type" : "mediumInteger"
+					},
+					{
+						"name" : "date",
+						"type" : "date"
+					},
+					{
+						"name" : "name",
+						"type" : "string",
+						"size" : 128,
+						"maxlength" : 128
 					},
 					{
 						"name" : "base",
@@ -118,7 +131,6 @@
 					},
 					{
 						"name" : "total",
-						"type" : "mediumInteger",
 						"type" : "decimal",
 						"size" : 10,
 						"decimals" : 4
@@ -130,10 +142,10 @@
 					}				
 				],
 			"timestamps" : false,
-			"foreign_key" : [["from","id","companies"],["to","id","companies"]]
+			"foreign_key" : [["company_id","id","companies"],["receiver_company_id","id","companies"]]
 		},
 		{
-			"name" : "bill_items",
+			"name" : "invoice_items",
 			"engine" : "InnoDB",
 			"columns" :  
 				[
@@ -142,8 +154,15 @@
 						"type" : "mediumIncrements"
 					},
 					{
-						"name" : "bill_id",
+						"name" : "invoice_id",
 						"type" : "mediumInteger"
+					},
+					{
+						"name" : "name",
+						"type" : "string",
+						"size" : 128,
+						"minlength" : 2,
+						"maxlenght" : 128
 					},
 					{
 						"name" : "base",
@@ -153,7 +172,7 @@
 					}				
 				],
 			"timestamps" : false,
-			"foreign_key" : [["bill_id","id","bills"]]
+			"foreign_key" : [["invoice_id","id","invoices"]]
 		}
 	]
 }

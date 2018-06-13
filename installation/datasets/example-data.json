@@ -1,0 +1,76 @@
+{
+	"code": "factum_example_data",
+	"version" : 1,
+	"model": "\\Factum\\Models\\Company",
+	"objects": [
+	{
+		"params": {
+			"id" : 1,
+			"user_id" : 1,
+			"reference" : "Frutería Sol",
+			"email" : "info@fruteriasol.com",
+			"telephone" : "600123123",
+			"name" : "FrutSol SA",
+			"code" : "E34259392",
+			"address" : "C/Rodriguez Arias 13",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"tax_id" : 1
+		}
+	},	
+	{
+		"params": {
+			"id" : 2,
+			"user_id" : 1,
+			"reference" : "Transportes Pedro",
+			"email" : "transportes.pedro@gmail.com",
+			"telephone" : "600300300",
+			"name" : "TransPe SL",
+			"code" : "G34282211",
+			"address" : "C/Gran Vía 13",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"tax_id" : 1
+		},
+		"relations": [
+		{
+			"relation": "customers",
+			"object": 1
+		},
+		{
+			"relation": "invoices",
+			"object": {
+				"params": {
+					"receiver_company_id": 1,
+					"date" : "2018-03-03",
+					"name" : "Fruta para evento",
+					"base" : "100.00",
+					"taxes" : "21.00",
+					"total" : "121.00",
+					"status" : 1
+				},
+				"relations": [
+					{
+						"relation": "items",
+						"object": {
+							"params": {
+								"name" : "Naranjas",
+								"base" : "50.00"
+							}
+						}
+					},
+					{
+						"relation": "items",
+						"object": {
+							"params": {
+								"name" : "Manzanas",
+								"base" : "50.00"
+							}
+						}
+					}				
+				]
+			}
+		}]
+	}
+	]
+}

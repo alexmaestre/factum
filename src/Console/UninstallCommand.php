@@ -64,15 +64,15 @@ class UninstallCommand extends Command
 		
 		$this->comment(PHP_EOL."Borrando capas");
 		InstallationManager::deleteLayers($this->controller);	
-		$this->info("Capas borradas)");		
-	
-		$this->comment(PHP_EOL."Borrando tabla(s)");
-		InstallationManager::uninstallSchema($this->schemas);
-		$this->info("Datos borrado(s)");	
-	
+		$this->info("Capa(s) borrada(s)");		
+
 		$this->comment(PHP_EOL."Borrando repositorio(s) de datos");
 		InstallationManager::uninstallDataset($this->datasets);
-		$this->info("Repositorio(s) de datos borrado(s)");		
+		$this->info("Repositorio(s) de datos borrado(s)");			
+
+		$this->comment(PHP_EOL."Borrando tabla(s)");
+		InstallationManager::uninstallSchema($this->schemas);
+		$this->info("Datos borrado(s)");
 		
 		$this->comment(PHP_EOL."Eliminado enlace(s) simbólico(s) a assets del package");
 		$ls = base_path().'/public/assets/vivazzio';
