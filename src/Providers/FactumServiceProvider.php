@@ -3,6 +3,7 @@ namespace Factum\Providers;
 
 use App;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 use VivaCMS\Services\Routing\RoutingManager;
 
 class FactumServiceProvider extends ServiceProvider
@@ -28,7 +29,9 @@ class FactumServiceProvider extends ServiceProvider
     public function boot()
     {				
 		if(!App::runningInConsole()){ 	
+			Route::aliasMiddleware('hasCompany', \Factum\Http\Middleware\HasCompany::class);
 			$layer = RoutingManager::getLayer();
+			$this->loadViewsFrom(__DIR__.'/../../resources/views', 'factum');
 			$path = __DIR__.'/../../resources/routes/'.$layer->router.'.php';
 			if(file_exists($path)){ $this->loadRoutesFrom($path); }		
 		}

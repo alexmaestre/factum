@@ -41,7 +41,7 @@ class InstallCommand extends Command
      * @var array
      */
     protected $layers = [
-		["type"=>1,"https"=>1,"router"=>"frontend","namespace"=>"Factum\\Controllers","package"=>"alexmaestre/factum","error_404"=>"404","language_id"=>1,"country_id"=>209,"time_zone_id"=>340,"currency_id"=>1]
+		["type"=>1,"https"=>1,"router"=>"factum","namespace"=>"Factum\\Controllers","package"=>"alexmaestre/factum","error_404"=>"404","language_id"=>1,"country_id"=>209,"time_zone_id"=>340,"currency_id"=>1]
 	];
 	
     /**
