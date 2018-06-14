@@ -9,22 +9,31 @@
 		<title>Factum</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport"/>	
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 		@csss(
+		css/bootstrap.min.css,
+		css/font-awesome.min.css,
+		../admin/plugins/toastr/toastr.min.css,
+		../admin/css/fontawesome-pro-core.css,
+		../admin/css/fontawesome-pro-solid.css,
 		css/login.css,
-		)		
+		)					
 	</head>
 
 	<body>		
 		<div class="container">
 			<body class="text-center">
-			<form class="form-signin">
-			  <h1 class="h3 mb-3 font-weight-normal">Acceso</h1>
-			  <label for="inputEmail" class="sr-only">Email</label>
-			  <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-			  <label for="inputPassword" class="sr-only">Password</label>
-			  <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+			<div class="alert alert-danger alert-dismissable @if(!session('error')) d-none @endif">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+				<i class="fa fa-warning"></i> 
+				<strong>¡Error!</strong> <span id="error"> @if(session('error')) {{session('error')}} @endif</span>
+			</div>
+			<form class="form-signin" method="post">
+			  <input type="hidden" name="_token" value="{{ csrf_token() }}">				
+			  <h1 class="h3 mb-3 font-weight-normal"><i class="fa fa-chart-bar"></i> <b>Factum</b></h1>
+			  <label for="loginEmail" class="sr-only">Email</label>
+			  <input type="email" id="loginEmail" class="form-control" placeholder="Email" name="loginEmail" data-rule-required="true" data-msg-required="Debe introducir un email" data-rule-email="true" data-msg-email="Debe introducir un email correcto" required autofocus>
+			  <label for="loginPassword" class="sr-only">Password</label>
+			  <input type="password" id="loginPassword" class="form-control" autocomplete="off" placeholder="Clave" name="loginPassword" data-rule-required="true" data-msg-required="Debe introducir su clave" required>
 			  <div class="checkbox mb-3">
 				<label>
 				  <input type="checkbox" value="remember-me"> Remember me
@@ -34,10 +43,15 @@
 			</form>
 			</body>
 		</div>
+				
+		@scripts(
+		js/jquery-3.3.1.min.js,
+		js/bootstrap.min.js,
+		../admin/plugins/toastr/toastr.min.js,
+		../admin/plugins/jquery-validation/jquery.validate.min.js,
+		../admin/plugins/jquery-validation/additional-methods.min.js
+		)								
 		
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
 		<script language="javascript">
 			var layer = {language : <?php echo json_encode(config('layer')->language, JSON_UNESCAPED_UNICODE); ?>};
 			var api_url = '{{ url("/") }}/api/';
@@ -48,10 +62,7 @@
 						toastr['{{ $notification['type'] }}']('{{ $notification['message'] }}','{{ $notification['title'] }}');
 					@endforeach
 					{{ Session::forget('notifications') }}
-				@endif
-				@foreach ($errors->all() as $error)
-					swal_error('{{ $error }}');
-				@endforeach					
+				@endif				
 			});
 		</script>
 

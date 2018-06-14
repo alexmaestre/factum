@@ -6,7 +6,7 @@ use Closure;
 use Factum\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
-class Guest
+class HasCompany
 {
     /**
      * Handle an incoming request.

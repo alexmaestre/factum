@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Factum Routes
@@ -9,26 +8,32 @@ use Illuminate\Http\Request;
 |
 */
 
-
-Route::group(['middleware' => ['web'],'namespace' => 'Factum\Controllers'], function () {
+Route::group(['middleware' => ['web']], function () {
 	
 	/* Authenticated users */
 	
 	Route::group(['middleware' => ['user']], function () {
 			
-		Route::group(['middleware' => ['hasCompany']], function () {
-		
+		Route::group(['middleware' => ['hasCompany'],'namespace' => 'Factum\Controllers'], function () {
 
+			Route::get('/mi-empresa',function(Request $request){ return view('factum::factum.mi-empresa');   });	
+			Route::get('/mi-cuenta',function(Request $request){ return view('factum::factum.mi-cuenta'); });	
+			Route::get('/clientes',function(Request $request){ return view('factum::factum.clientes'); });		
+			Route::get('/proveedores',function(Request $request){ return view('factum::factum.proveedores'); });		
+			Route::get('/ingresos',function(Request $request){ return view('factum::factum.ingresos'); });		
+			Route::get('/gastos',function(Request $request){ return view('factum::factum.gastos'); });		
+			Route::get('/facturas',function(Request $request){ return view('factum::factum.facturas'); });					
+			Route::get('/balances',function(Request $request){ return view('factum::factum.balances'); });		
 			
 		});
 		
 		//Logout
-		Route::get('/logout','Auth\AuthAdmin@getLogout');			
+		Route::get('/logout','VivaCMS\Controllers\Auth\AuthAdmin@getLogout');
 		
 	});	
 	
 	/* Guests */
-	Route::group(['middleware' => ['guest']], function () {	
+	Route::group(['middleware' => ['guest'],'namespace' => 'VivaCMS\Controllers'], function () {	
 		Route::post('/','Auth\AuthAdmin@getLogin');
 	});
 	
