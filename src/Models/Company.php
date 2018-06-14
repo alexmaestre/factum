@@ -25,7 +25,7 @@ class Company extends \VivaCMS\Models\Model
      * @var array
      */
     protected $fillable = [
-        'user_id','reference','email','telephone','name','code','address','city_id','postal_code_id','tax_id'
+        'user_id','reference','email','telephone','name','code','address','city_id','postal_code_id','vat_id'
     ];	
 
     /**
@@ -50,31 +50,31 @@ class Company extends \VivaCMS\Models\Model
 				]
 			],	
 			"reference" => [
-				"type" => "string",
+				"type" => "text",
 				"maxLength" => 128
 			],
 			"email" => [
-				"type" => "string",
+				"type" => "text",
 				"maxLength" => 128,
 				"email" => true
 			],
 			"telephone" => [
-				"type" => "string",
+				"type" => "text",
 				"nullable" => true,
 				"minLength" => 9,
 				"maxLength" => 9,
 				"masks" => ["numeric"]
 			],		
 			"name" => [
-				"type" => "string",
+				"type" => "text",
 				"maxLength" => 64,
 			],			
 			"code" => [
-				"type" => "string",
+				"type" => "text",
 				"maxLength" => 64
 			],
 			"address" => [
-				"type" => "string",
+				"type" => "text",
 				"nullable" => true,
 				"maxLength" => 128
 			],
@@ -122,10 +122,58 @@ class Company extends \VivaCMS\Models\Model
 						"with" => ["cities.translation"]
 					]
 				]
-			],			
-			"tax_id" => [
-				"type" => "integer",
+			],	
+			"vat_id" => [	
+				"type" => "select2",
+				"nullable" => true,
+				"optionName" => ["vat","translation","name"],
+				"api" => [
+					"url" => "vats",				
+					"obj"=>"obj.translation.name",
+					"params" => [
+						"with" => ["translation"],
+						"where"=> [[
+							"relation" => "translation",
+							"param" => "name",
+							"operator" => "LIKE",
+							"value" => "%params.term%",
+						]],
+						"sort" => [[
+							"relation" => "translation",
+							"param" => "name",
+							"order" => "ASC",
+						]]
+					]
+				]
 			]		
+		],
+		"validation" => [
+			"rules" => [
+				"user_id" => 'bail|nullable|exists:users,id',
+				"reference" => 'bail|required|max:128',
+				"email" => 'bail|nullable|email|max:128',
+				"telephone" => 'bail|nullable',
+				"name" => 'bail|required|max:64',
+				"code" => 'bail|required|max:64',
+				"address" => 'bail|nullable|max:128',
+				"city_id" => 'bail|nullable|exists:geo_cities,id',
+				"postal_code_id" => 'bail|nullable|exists:geo_postal_codes,id',
+				"postal_code_id" => 'bail|exists:geo_vats,id'
+			],
+			"messages" => [
+				"user_id.exists" => 'El usuario indicado no existe',	
+				"reference.required" => 'Debe introducir un nombre dereferencia',
+				"reference.max" => 'El nombre de referencia no puede tener más de 128 caracteres',
+				"email.email" => 'El email introducido no es válido',
+				"name.required" => 'Debe introducir el nombre fiscal',
+				"name.max" => 'El nombre fiscal no puede tener más de 64 caraceteres',
+				"name.required" => 'Debe introducir el código fiscal',
+				"name.max" => 'El código fiscal no puede tener más de 64 caraceteres',
+				"address.max" => 'La dirección fiscal no puede tener más de 128 caracteres',
+				"city_id.exists" => 'El código de ciudad introducido es incorrecto',
+				"postal_code_id.exists" => 'El código postal introducido es incorrecto',
+				"vat_id.exists" => 'La tasa impositiva introducida es incorrecta'
+			]
 		]
 	);		
 

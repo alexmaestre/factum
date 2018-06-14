@@ -70,7 +70,7 @@ class Invoice extends \VivaCMS\Models\Model
 				"type" => "date"
 			],	
 			"name" => [
-				"type" => "string",
+				"type" => "text",
 				"minLength" => 2,
 				"maxLength" => 128,
 			],

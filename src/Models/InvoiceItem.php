@@ -57,7 +57,7 @@ class InvoiceItem extends \VivaCMS\Models\Model
 				]
 			],		
 			"name" => [
-				"type"=>"string",
+				"type"=>"text",
 				"minLength" => 2,
 				"maxLength" => 120,
 			],

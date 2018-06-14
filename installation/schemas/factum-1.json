@@ -61,13 +61,13 @@
 						"nullable" : true
 					},
 					{
-						"name" : "tax_id",
-						"type" : "integer",
+						"name" : "vat_id",
+						"type" : "mediumInteger",
 						"size" : 12
 					}					
 				],
 			"timestamps" : true,
-			"foreign_key" : [["user_id","id","users"],["city_id","id","geo_cities"],["postal_code_id","id","geo_postal_codes"]]
+			"foreign_key" : [["user_id","id","users","set null"],["city_id","id","geo_cities"],["postal_code_id","id","geo_postal_codes"],["vat_id","id","geo_vats"]]
 		},
 		{
 			"name" : "company_customers",
@@ -88,7 +88,7 @@
 					}				
 				],
 			"timestamps" : false,
-			"foreign_key" : [["company_id","id","companies"],["customer_company_id","id","companies"]]
+			"foreign_key" : [["company_id","id","companies","cascade"],["customer_company_id","id","companies","cascade"]]
 		},
 		{
 			"name" : "invoices",

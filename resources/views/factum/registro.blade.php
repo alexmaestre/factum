@@ -6,13 +6,13 @@
 		
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">				
 		<h1 class="h3 mb-3 font-weight-normal"><i class="fa fa-chart-bar"></i> <b>Factum</b></h1>
-		
+		<h5>Datos personales</h5>
 		{!!	$user->setInputTemplate('factum::factum/forms'); !!}
 		{!!	$user->getInput(['param'=>'name','placeholder'=>'Nombre','label']) !!}
 		{!!	$user->getInput(['param'=>'surname','placeholder'=>'Apellidos']) !!}
 		{!!	$user->getInput(['param'=>'email','placeholder'=>'Email']) !!}
 		{!!	$user->getInput(['param'=>'password','placeholder'=>'Clave']) !!}
-		
+		<h5>Datos de la empresa</h5>
 		{!!	$company->setInputTemplate('factum::factum/forms'); !!}
 		{!!	$company->getInput(['param'=>'reference','placeholder'=>'Nombre de referencia']) !!}
 		{!!	$company->getInput(['param'=>'name','placeholder'=>'Nombre fiscal']) !!}	

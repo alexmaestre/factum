@@ -7,7 +7,7 @@ use VivaCMS\Controllers\UserController;
 use VivaCMS\Models\User;
 use VivaCMS\Exceptions\ModelControllerException;
 use Factum\Models\Company;
-use Illuminate\Support\Facades\Input;
+use Factum\Controllers\CompanyController;
 
 class SignIn extends Controller{
 
@@ -28,13 +28,18 @@ class SignIn extends Controller{
      */
     public function register(Request $request)
     {
-		Input::flash();
 		$c = new UserController();
 		$create = $c->createObject($c->model,$request->get('user'));
 		if($create === false){ 
 			return back()->withErrors($c->error)->withInput();
 		};
-		return redirect(layer_url())->with('error','Registro realizado');
+		$c = new CompanyController();
+		$m = array_merge($request->get('company'),["user_id" => $create->id,"tax_id" => 2]);
+		$create = $c->createObject($c->model,$m);
+		if($create === false){ 
+			return back()->withErrors($c->error)->withInput();
+		};		
+		return redirect(layer_url())->with('success','Registro realizado');
     }	
 	
 }

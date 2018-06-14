@@ -14,7 +14,7 @@ class CompanyController extends BaseController
      * @return void
      */	
 	public function __construct(){
-		parent::__construct('\Factum\Models\ Company');
+		parent::__construct('\Factum\Models\Company');
 	}	
 	
 }

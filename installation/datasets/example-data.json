@@ -15,7 +15,7 @@
 			"address" : "C/Rodriguez Arias 13",
 			"city_id" : 7495,
 			"postal_code_id" : 10435,
-			"tax_id" : 1
+			"vat_id" : 1
 		}
 	},	
 	{
@@ -30,7 +30,7 @@
 			"address" : "C/Gran Vía 13",
 			"city_id" : 7495,
 			"postal_code_id" : 10435,
-			"tax_id" : 1
+			"vat_id" : 1
 		},
 		"relations": [
 		{
