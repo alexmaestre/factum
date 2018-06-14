@@ -3,6 +3,7 @@
 namespace Factum\Http\Middleware;
 
 use Closure;
+use Session;
 use Factum\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,9 @@ class HasCompany
     public function handle($request, Closure $next, $guard = null)
     {		
 		if(Company::where('user_id',Auth::user()->id)->count() == 0){
-				return redirect(layer_url())->with('error', 'El usuario no tiene asociada ninguna empresa'); 
+			Auth::logout();
+			Session::flush();
+			return redirect(layer_url())->with('error', 'El usuario no tiene asociada ninguna empresa'); 
 		}    
 		
 		return $next($request); 

@@ -16,9 +16,10 @@ Route::group(['middleware' => ['web']], function () {
 			
 		Route::group(['middleware' => ['hasCompany'],'namespace' => 'Factum\Controllers'], function () {
 
+			Route::get('/home',function(Request $request){ return view('factum::factum.mi-empresa');   });	
 			Route::get('/mi-empresa',function(Request $request){ return view('factum::factum.mi-empresa');   });	
 			Route::get('/mi-cuenta',function(Request $request){ return view('factum::factum.mi-cuenta'); });	
-			Route::get('/clientes',function(Request $request){ return view('factum::factum.clientes'); });		
+			Route::get('/clientes','InvoiceController@index');		
 			Route::get('/proveedores',function(Request $request){ return view('factum::factum.proveedores'); });		
 			Route::get('/ingresos',function(Request $request){ return view('factum::factum.ingresos'); });		
 			Route::get('/gastos',function(Request $request){ return view('factum::factum.gastos'); });		
@@ -33,8 +34,10 @@ Route::group(['middleware' => ['web']], function () {
 	});	
 	
 	/* Guests */
-	Route::group(['middleware' => ['guest'],'namespace' => 'VivaCMS\Controllers'], function () {	
-		Route::post('/','Auth\AuthAdmin@getLogin');
+	Route::group(['middleware' => ['guest']], function () {	
+		Route::get('/registro','Factum\Controllers\SignIn@form');
+		Route::post('/registro','Factum\Controllers\SignIn@register');
+		Route::post('/','VivaCMS\Controllers\Auth\AuthAdmin@getLogin');
 	});
 	
 	/* Common */ 
@@ -42,7 +45,7 @@ Route::group(['middleware' => ['web']], function () {
 		if(!Auth::check()){
 			return view('factum::factum.login'); 
 		}else{
-			return view('factum::factum.home');  
+			return redirect(layer_url().'home');  
 		}
 	});
 

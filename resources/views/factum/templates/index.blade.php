@@ -13,6 +13,7 @@
 		css/bootstrap.min.css,
 		css/font-awesome.min.css,
 		../admin/plugins/toastr/toastr.min.css,
+		../admin/plugins/bootstrap-sweetalert/sweetalert.css,
 		../admin/css/fontawesome-pro-core.css,
 		../admin/css/fontawesome-pro-solid.css,
 		css/index.css
@@ -54,7 +55,9 @@
 		@scripts(
 		js/jquery-3.3.1.min.js,
 		js/bootstrap.min.js,
-		js/js.cookie.js
+		js/js.cookie.js,
+		../admin/plugins/bootstrap-sweetalert/sweetalert.min.js,
+		js/swal_error.js
 		)			
 
 		<script language="javascript">
@@ -68,7 +71,6 @@
 				e.preventDefault();
 				$("#wrapper").toggleClass("toggled");
 				if($("#wrapper").hasClass("toggled")){ Cookies.set('menu',1); }else{ Cookies.set('menu',0); };
-				console.log(Cookies.get('menu'));
 			});			
 			
 			$(document).ready(function() {	

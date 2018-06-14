@@ -48,7 +48,11 @@ class Company extends \VivaCMS\Models\Model
 						"sort" => [["param" => "full_name", "order" => "ASC"]]
 					]
 				]
-			],		
+			],	
+			"reference" => [
+				"type" => "string",
+				"maxLength" => 128
+			],
 			"email" => [
 				"type" => "string",
 				"maxLength" => 128,

@@ -1,0 +1,2 @@
+<label for="{{ @$id }}" class="sr-only">{{ $label }}</label>
+<input type="password" {!! @$objectData !!} class="form-control {{ @$masks }}" id="{{ @$id }}" name="{{ @$id }}" value="{{ @$value }}" placeholder="{{ @$placeholder }}" {!! @$email !!} {!! @$required !!} {!! @$maxLength !!} {!! @$minLength !!} data-label="{{$label}}">
