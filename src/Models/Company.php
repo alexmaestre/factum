@@ -124,20 +124,12 @@ class Company extends \VivaCMS\Models\Model
 				]
 			],	
 			"vat_id" => [	
-				"type" => "select2",
-				"nullable" => true,
-				"optionName" => ["vat","translation","name"],
+				"type" => "select",
 				"api" => [
 					"url" => "vats",				
 					"obj"=>"obj.translation.name",
 					"params" => [
 						"with" => ["translation"],
-						"where"=> [[
-							"relation" => "translation",
-							"param" => "name",
-							"operator" => "LIKE",
-							"value" => "%params.term%",
-						]],
 						"sort" => [[
 							"relation" => "translation",
 							"param" => "name",

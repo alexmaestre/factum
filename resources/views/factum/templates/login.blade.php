@@ -16,6 +16,8 @@
 		../admin/plugins/bootstrap-sweetalert/sweetalert.css,
 		../admin/css/fontawesome-pro-core.css,
 		../admin/css/fontawesome-pro-solid.css,
+		../admin/plugins/select2/css/select2.min.css,
+		../admin/plugins/select2/css/select2-bootstrap.min.css,
 		css/login.css
 		)					
 	</head>
@@ -40,8 +42,11 @@
 		../admin/scripts/auto-alphanum.js,
 		../admin/plugins/jquery-validation/jquery.validate.min.js,
 		../admin/plugins/jquery-validation/localization/messages_[[language]].js,
-		../admin/scripts/auto-jquery-validation.js
-		)								
+		../admin/scripts/auto-jquery-validation.js,
+		../admin/scripts/api-calls.js,
+		../admin/plugins/select2/js/select2.full.min.js,
+		../admin/scripts/auto-load-selects.js
+		)			
 		
 		<script language="javascript">
 			var layer = {language : <?php echo json_encode(config('layer')->language, JSON_UNESCAPED_UNICODE); ?>};

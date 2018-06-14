@@ -18,6 +18,7 @@
 		{!!	$company->getInput(['param'=>'name','placeholder'=>'Nombre fiscal']) !!}	
 		{!!	$company->getInput(['param'=>'code','placeholder'=>'NIF']) !!}	
 		{!!	$company->getInput(['param'=>'address','placeholder'=>'Direccón fiscal']) !!}	
+		{!!	$company->getInput(['param'=>'vat_id','placeholder'=>'Tasa impositiva']) !!}	
 	
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Registrarse</button>
 		

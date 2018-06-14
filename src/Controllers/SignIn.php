@@ -18,23 +18,24 @@ class SignIn extends Controller{
      */
     public function form()
     {
-		return view('factum::factum.registro')->with(['user'=>new User(),'company'=>new Company()]);
+		return view('factum::factum.sign-up')->with(['user'=>new User(),'company'=>new Company()]);
     }
 	
     /**
-     * Register user
+     * Sign Up user
      *
      * @return Response
      */
-    public function register(Request $request)
+    public function signup(Request $request)
     {
 		$c = new UserController();
-		$create = $c->createObject($c->model,$request->get('user'));
+		$m = array_merge($request->get('user'),["status_id" => 1]);
+		$create = $c->createObject($c->model,$m);
 		if($create === false){ 
 			return back()->withErrors($c->error)->withInput();
 		};
 		$c = new CompanyController();
-		$m = array_merge($request->get('company'),["user_id" => $create->id,"tax_id" => 2]);
+		$m = array_merge($request->get('company'),["user_id" => $create->id]);
 		$create = $c->createObject($c->model,$m);
 		if($create === false){ 
 			return back()->withErrors($c->error)->withInput();
