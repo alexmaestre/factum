@@ -45,6 +45,7 @@
 		../admin/scripts/auto-jquery-validation.js,
 		../admin/scripts/api-calls.js,
 		../admin/plugins/select2/js/select2.full.min.js,
+		../admin/plugins/select2/js/i18n/[[language]].js,
 		../admin/scripts/auto-load-selects.js
 		)			
 		

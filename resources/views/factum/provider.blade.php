@@ -11,7 +11,8 @@
 @section('content')
 	<div class="row mb-3">
 		<div class="col-12">
-			<h2 class="float-left">Mi empresa</h2>
+			<h2 class="float-left">{{ $provider->reference }}</h2>
+			<a href="{{ layer_url() }}proveedores" class="float-left"><button class="btn btn-lg btn-primary ml-3"><i class="fa fa-arrow-left"></i></button></a>
 		</div>
 	</div>
 	
@@ -19,16 +20,16 @@
 		<div class="col-12">
 			<form class="data-validation editObjectForm" method="post" onSubmit="return false;">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">		
-				{!!	$company->setInputTemplate('factum::factum/forms'); !!}
-				{!!	$company->getInput(['param'=>'reference','placeholder'=>'Nombre de referencia']) !!}
-				{!!	$company->getInput(['param'=>'email','placeholder'=>'Email']) !!}
-				{!!	$company->getInput(['param'=>'telephone','placeholder'=>'Teléfono']) !!}	
-				{!!	$company->getInput(['param'=>'name','placeholder'=>'Nombre fiscal']) !!}	
-				{!!	$company->getInput(['param'=>'code','placeholder'=>'NIF']) !!}
-				{!!	$company->getInput(['param'=>'address','placeholder'=>'Direccón fiscal']) !!}	
-				{!!	$company->getInput(['param'=>'city_id','placeholder'=>'Seleccionar ciudad']) !!}
-				{!!	$company->getInput(['param'=>'postal_code_id','placeholder'=>'Seleccionar código postal']) !!}
-				{!!	$company->getInput(['param'=>'vat_id','placeholder'=>'Tasa impositiva']) !!}	
+				{!!	$provider->setInputTemplate('factum::factum/forms'); !!}
+				{!!	$provider->getInput(['param'=>'reference','placeholder'=>'Nombre de referencia']) !!}
+				{!!	$provider->getInput(['param'=>'email','placeholder'=>'Email']) !!}
+				{!!	$provider->getInput(['param'=>'telephone','placeholder'=>'Teléfono']) !!}	
+				{!!	$provider->getInput(['param'=>'name','placeholder'=>'Nombre fiscal']) !!}	
+				{!!	$provider->getInput(['param'=>'code','placeholder'=>'NIF']) !!}
+				{!!	$provider->getInput(['param'=>'address','placeholder'=>'Direccón fiscal']) !!}	
+				{!!	$provider->getInput(['param'=>'city_id','placeholder'=>'Seleccionar ciudad']) !!}
+				{!!	$provider->getInput(['param'=>'postal_code_id','placeholder'=>'Seleccionar código postal']) !!}
+				{!!	$provider->getInput(['param'=>'vat_id','placeholder'=>'Tasa impositiva']) !!}	
 			</form>
 		</div>
 	</div>

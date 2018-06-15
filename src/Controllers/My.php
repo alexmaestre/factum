@@ -1,13 +1,9 @@
 <?php
 namespace Factum\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use VivaCMS\Controllers\UserController;
 use VivaCMS\Models\User;
-use VivaCMS\Exceptions\ModelControllerException;
 use Factum\Models\Company;
-use Factum\Controllers\CompanyController;
 
 class My extends Controller{
 

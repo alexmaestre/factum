@@ -2,6 +2,23 @@ body {
   overflow-x: hidden;
 }
 
+h2{
+	font-size:22px;
+	font-weight:600;
+	line-height:48px;
+	margin-bottom:0px;
+}
+
+tr[data-href] td{
+	cursor:pointer;
+}
+
+@media(min-width:768px) {
+	h2{
+		font-size:26px;
+	}	
+}
+
 #wrapper {
   padding-left: 32px;
   -webkit-transition: all 0.5s ease;
@@ -146,22 +163,41 @@ form input, form select{
   margin-bottom: 10px;
 }
 
-.editObjectForm .input-group .select2{
-	width:220px !important;
+.input-group input,.input-group select{
+	border-radius:5px !important;
 }
 
-.editObjectForm .input-group .select2-selection{
+.editObjectForm .input-group input,.editObjectForm .input-group select{
+	border-radius:0 5px 5px 0 !important;
+}
+
+.editObjectForm .input-group button{
+	border-radius:5px 0 0 5px;
+	background-color:#ced4da;
+}
+
+.select2-selection{
 	border-radius:0 5px 5px 0;
 	border-color:#ced4da;
 	height:38px;
 }
 
-.editObjectForm .input-group .select2-selection__arrow{
+.select2-selection__arrow{
 	color:#ced4da;
 	height:38px !important;
 }
 
-.editObjectForm .input-group .select2-selection__rendered{
+.select2-selection--single{
+	height:38px !important;
+	border-radius:5px !important;
+	border-color:#ced4da !important;		
+}
+
+.editObjectForm .select2-selection--single{
+	border-radius:0 5px 5px 0 !important;	
+}
+
+.select2-selection__rendered{
 	line-height:38px !important;
 }
 
@@ -174,9 +210,3 @@ form input, form select{
 .border-yellow-gold{ border:solid 1px orange; }
 .red-mint{ background-color:red !important; }
 .border-red-mint{ border:solid 1px red; }
-
-
-.editObjectForm .input-group button{
-	border-radius:5px 0 0 5px;
-	background-color:#ced4da;
-}

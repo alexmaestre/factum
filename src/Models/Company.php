@@ -75,7 +75,6 @@ class Company extends \VivaCMS\Models\Model
 			],
 			"address" => [
 				"type" => "text",
-				"nullable" => true,
 				"maxLength" => 128
 			],
 			"city_id" => [	
@@ -150,7 +149,7 @@ class Company extends \VivaCMS\Models\Model
 				"address" => 'bail|nullable|max:128',
 				"city_id" => 'bail|nullable|exists:geo_cities,id',
 				"postal_code_id" => 'bail|nullable|exists:geo_postal_codes,id',
-				"postal_code_id" => 'bail|exists:geo_vats,id'
+				"vat_id" => 'bail|required|exists:geo_vats,id'
 			],
 			"messages" => [
 				"user_id.exists" => 'El usuario indicado no existe',	
@@ -159,11 +158,12 @@ class Company extends \VivaCMS\Models\Model
 				"email.email" => 'El email introducido no es válido',
 				"name.required" => 'Debe introducir el nombre fiscal',
 				"name.max" => 'El nombre fiscal no puede tener más de 64 caraceteres',
-				"name.required" => 'Debe introducir el código fiscal',
-				"name.max" => 'El código fiscal no puede tener más de 64 caraceteres',
+				"code.required" => 'Debe introducir el código fiscal',
+				"code.max" => 'El código fiscal no puede tener más de 64 caraceteres',
 				"address.max" => 'La dirección fiscal no puede tener más de 128 caracteres',
 				"city_id.exists" => 'El código de ciudad introducido es incorrecto',
 				"postal_code_id.exists" => 'El código postal introducido es incorrecto',
+				"vat_id.required" => 'Debe seleccionar la tasa impositiva',
 				"vat_id.exists" => 'La tasa impositiva introducida es incorrecta'
 			]
 		]
@@ -200,13 +200,54 @@ class Company extends \VivaCMS\Models\Model
     }	
 	
     /**
-     * Company Invoices
+     * Company Incomes
      *
      * @return Invoice Model
      */
-    public function invoices()
+    public function incomes()
 	{
         return $this->hasMany(Invoice::class);
     }	
+	
+    /**
+     * Company Expenses
+     *
+     * @return Invoice Model
+     */
+    public function expenses()
+	{
+        return $this->hasMany(Invoice::class,'receiver_company_id','id');
+    }	
+		
+	
+    /**
+     * Company Vat
+     *
+     * @return Vat Model
+     */
+    public function vat()
+	{
+        return $this->belongsTo(\Geo\Models\Vat::class);
+    }	
+	
+    /**
+     * Company city
+     *
+     * @return City Model
+     */
+    public function city()
+	{
+        return $this->belongsTo(\Geo\Models\City::class);
+    }
+
+    /**
+     * Company postal_code
+     *
+     * @return PostalCode Model
+     */
+    public function postal_code()
+	{
+        return $this->belongsTo(\Geo\Models\PostalCode::class);
+    }		
 	
 }

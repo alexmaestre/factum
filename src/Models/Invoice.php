@@ -27,6 +27,13 @@ class Invoice extends \VivaCMS\Models\Model
 	public $timestamps = false; 		
 		
     /**
+     * The attributes that are dates.
+     *
+     * @var array
+     */	
+	protected $dates = ['date'];			
+		
+    /**
      * The attributes that are mass assignable.
      *
      * @var array
@@ -46,7 +53,7 @@ class Invoice extends \VivaCMS\Models\Model
 				"type" => "hidden",
 				"exportable" => false
 			],
-			"issuer_company_id" => [	
+			"company_id" => [	
 				"type" => "select",
 				"api" => [
 					"url" => "companies",
@@ -92,6 +99,33 @@ class Invoice extends \VivaCMS\Models\Model
 			"status" => [
 				"type" => "boolean"
 			]		
+		],		
+		"validation" => [
+			"rules" => [
+				"company_id" => 'bail|required|exists:companies,id',
+				"receiver_company_id" => 'bail|required|exists:companies,id',
+				"date" => 'bail|nullable|date_format:"d/m/Y"',
+				"name" => 'bail|required|max:64',
+				"base" => 'bail|required|regex:/^\d*(\.,\d{1,4})?$/|min:0',
+				"taxes" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0',
+				"total" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0',
+			],
+			"messages" => [
+				"company_id.required" => 'Debe introducirse una empresa emisora',	
+				"company_id.exists" => 'La empresa emisora es incorrecta',	
+				"receiver_company_id.required" => 'Debe introducirse una empresa receptora',	
+				"receiver_company_id.exists" => 'La empresa receptora es incorrecta',
+				"date.date_format" => 'El formato de la fecha es incorrecto. Debe ser dd/mm/aaaa',
+				"name.required" => 'Debe introducir un nombre para la factura',
+				"name.max" => 'El nombre de la factura no puede tener más de 64 caracteres',
+				"base.required" => 'Debe introducir la base imponible de la factura',
+				"base.regex" => 'La base imponible de la factura debe ser un número con hasta 4 decimales',
+				"base.min" => 'La base imponible de la factura debe ser un número mayor que cero',
+				"taxes.regex" => 'La cuota impositiva de la factura debe ser un número con hasta 4 decimales',
+				"taxes.min" => 'La cuota impositiva de la factura debe ser un número mayor que cero',
+				"total.regex" => 'El total de la factura debe ser un número con hasta 4 decimales',
+				"total.min" => 'El total de la factura debe ser un número mayor que cero'
+			]
 		]
 	);		
 
@@ -102,7 +136,7 @@ class Invoice extends \VivaCMS\Models\Model
      */
     public function company()
 	{
-        return $this->belongsTo(Company::class,'company_id','companies','id');
+        return $this->belongsTo(Company::class,'company_id','id');
     }
 	
     /**
@@ -112,7 +146,7 @@ class Invoice extends \VivaCMS\Models\Model
      */
     public function receiver()
 	{
-        return $this->belongsTo(Company::class,'receiver_company_id','companies','id');
+        return $this->belongsTo(Company::class,'receiver_company_id','id');
     }
 
     /**

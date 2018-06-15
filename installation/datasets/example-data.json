@@ -6,12 +6,12 @@
 	{
 		"params": {
 			"id" : 1,
-			"user_id" : 1,
-			"reference" : "Frutería Sol",
-			"email" : "info@fruteriasol.com",
-			"telephone" : "600123123",
-			"name" : "FrutSol SA",
-			"code" : "E34259392",
+			"user_id" : null,
+			"reference" : "Cárnicas López",
+			"email" : "info@carnicaslopez.com",
+			"telephone" : "944564555",
+			"name" : "Carnicas López SA",
+			"code" : "G29310298",
 			"address" : "C/Rodriguez Arias 13",
 			"city_id" : 7495,
 			"postal_code_id" : 10435,
@@ -21,13 +21,28 @@
 	{
 		"params": {
 			"id" : 2,
+			"user_id" : 2,
+			"reference" : "Supermercados Rai",
+			"email" : "info@supermercados-rai.com",
+			"telephone" : "900393922",
+			"name" : "Rai Trans 2000 SA",
+			"code" : "G12399411",
+			"address" : "C/María Díaz de Haro 3",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"vat_id" : 1
+		}
+	},
+	{
+		"params": {
+			"id" : 3,
 			"user_id" : 1,
-			"reference" : "Transportes Pedro",
-			"email" : "transportes.pedro@gmail.com",
-			"telephone" : "600300300",
-			"name" : "TransPe SL",
-			"code" : "G34282211",
-			"address" : "C/Gran Vía 13",
+			"reference" : "Distribuidor Carnic",
+			"email" : "kaixo@carnic.eus",
+			"telephone" : "944550022",
+			"name" : "Carnic SL",
+			"code" : "G29349422",
+			"address" : "C/Gran Vía 85",
 			"city_id" : 7495,
 			"postal_code_id" : 10435,
 			"vat_id" : 1
@@ -38,15 +53,19 @@
 			"object": 1
 		},
 		{
-			"relation": "invoices",
+			"relation": "providers",
+			"object": 2
+		},
+		{
+			"relation": "incomes",
 			"object": {
 				"params": {
-					"receiver_company_id": 1,
+					"receiver_company_id": 2,
 					"date" : "2018-03-03",
-					"name" : "Fruta para evento",
-					"base" : "100.00",
-					"taxes" : "21.00",
-					"total" : "121.00",
+					"name" : "Provisión carnicería 2",
+					"base" : "500.00",
+					"taxes" : "105.00",
+					"total" : "605.00",
 					"status" : 1
 				},
 				"relations": [
@@ -54,8 +73,8 @@
 						"relation": "items",
 						"object": {
 							"params": {
-								"name" : "Naranjas",
-								"base" : "50.00"
+								"name" : "30kg magro",
+								"base" : "420.00"
 							}
 						}
 					},
@@ -63,8 +82,33 @@
 						"relation": "items",
 						"object": {
 							"params": {
-								"name" : "Manzanas",
-								"base" : "50.00"
+								"name" : "3 corderos",
+								"base" : "180.00"
+							}
+						}
+					}				
+				]
+			}
+		},
+		{
+			"relation": "expenses",
+			"object": {
+				"params": {
+					"company_id": 1,
+					"date" : "2018-03-03",
+					"name" : "Servicio Marzo",
+					"base" : "2000.00",
+					"taxes" : "420.00",
+					"total" : "2420.00",
+					"status" : 1
+				},
+				"relations": [
+					{
+						"relation": "items",
+						"object": {
+							"params": {
+								"name" : "3 reses para despiece",
+								"base" : "2000.00"
 							}
 						}
 					}				

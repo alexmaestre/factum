@@ -59,13 +59,29 @@ class InvoiceItem extends \VivaCMS\Models\Model
 			"name" => [
 				"type"=>"text",
 				"minLength" => 2,
-				"maxLength" => 120,
+				"maxLength" => 128,
 			],
 			"base" => [
 				"type" => "text",
 				"maxLength" => 12,
 				"masks" => ["coordinate"]
 			]	
+		],
+		"validation" => [
+			"rules" => [
+				"invoice_id" => 'bail|required|exists:invoices,id',
+				"name" => 'bail|required|max:128',
+				"base" => 'bail|required|regex:/^\d*(\.,\d{1,4})?$/|min:0'
+			],
+			"messages" => [
+				"invoice_id.required" => 'Se debe indicar la factura a la cual se asocia el concepto',
+				"invoice_id.exists" => 'El concepto debe pertener a una factura existente',	
+				"name.required" => 'Debe indicar un nombre para el concepto',
+				"name.max" => 'El nombre del item no puede tener más de 128 caracteres',
+				"base.required" => 'Debe introducir la base imponible del concepto',
+				"base.regex" => 'La base imponible del concepto debe ser un número con hasta 4 decimales',
+				"base.min" => 'La base imponible del concepto debe ser un número mayor que cero'
+			]
 		]
 	);		
 

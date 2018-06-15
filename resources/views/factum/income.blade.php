@@ -1,17 +1,19 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-	<title>Mi cuenta</title>
+	<title>Mi empresa</title>
 	@csss(
 		../admin/plugins/select2/css/select2.min.css,
-		../admin/plugins/select2/css/select2-bootstrap.min.css
+		../admin/plugins/select2/css/select2-bootstrap.min.css,
+		../admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css
 	)
 @stop
 
 @section('content')
 	<div class="row mb-3">
 		<div class="col-12">
-			<h2 class="float-left">Mi cuenta</h2>
+			<h2 class="float-left">Factura {{ $income->id }}: {{ $income->name }}</h2>
+			<a href="{{ layer_url() }}ingresos" class="float-left"><button class="btn btn-lg btn-primary ml-3"><i class="fa fa-arrow-left"></i></button></a>
 		</div>
 	</div>
 	
@@ -19,19 +21,18 @@
 		<div class="col-12">
 			<form class="data-validation editObjectForm" method="post" onSubmit="return false;">
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">		
-				{!!	$user->setInputTemplate('factum::factum/forms'); !!}
-				{!!	$user->getInput(['param'=>'name','placeholder'=>'Nombre','label']) !!}
-				{!!	$user->getInput(['param'=>'surname','placeholder'=>'Apellidos']) !!}
-				{!!	$user->getInput(['param'=>'email','placeholder'=>'Email']) !!}
-				{!!	$user->getInput(['param'=>'password','placeholder'=>'Clave']) !!}
-				{!!	$user->getInput(['param'=>'city_id','placeholder'=>'Seleccionar ciudad']) !!}
-				{!!	$user->getInput(['param'=>'postal_code_id','placeholder'=>'Seleccionar código postal']) !!}
+				{!!	$income->setInputTemplate('factum::factum/forms'); !!}
+				{!!	$income->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
+				{!!	$income->getInput(['param'=>'company_id','placeholder'=>'Proveedor',"options"=>[""=>"Seleccionar empresa receptora"]]) !!}
+				{!!	$income->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
 			</form>
 		</div>
 	</div>
 @stop
 
 @section('footer')
+	@js(../admin/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js)
+	@js(../admin/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.{{config('layer')->language->iso}}.min.js)	
 	@scripts(
 		../admin/plugins/select2/js/select2.full.min.js,
 		../admin/plugins/select2/js/i18n/[[language]].js,
