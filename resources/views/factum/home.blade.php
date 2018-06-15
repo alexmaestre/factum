@@ -1,6 +1,7 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
+	<title>Factum</title>
 @stop
 
 @section('content')

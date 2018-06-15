@@ -28,10 +28,33 @@ body {
   padding:5px !important;
 }
 
+.form-signin  .input-group .select2{
+	width:300px !important;
+}
+
+.form-signin .input-group .select2-selection{
+	border-color:#ced4da;
+	height:38px;
+}
+
+.form-signin .input-group .select2-selection__arrow{
+	color:#ced4da;
+	height:38px !important;
+}
+
+.form-signin .input-group .select2-selection__rendered{
+	line-height:38px !important;
+}
+
+*:focus {
+    outline: none !important;
+	box-shadow:none !important;
+}
+
 button a{
   color:white;
 }
 
 h5{
-	font-size:15px;
+  font-size:15px;
 }

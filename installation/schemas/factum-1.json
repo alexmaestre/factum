@@ -43,7 +43,7 @@
 					{
 						"name" : "code",
 						"type" : "string",
-						"size" : 64
+						"size" : 32
 					},
 					{
 						"name" : "address",

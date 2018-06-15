@@ -16,9 +16,9 @@ Route::group(['middleware' => ['web'],'namespace' => 'Factum\Controllers'], func
 			
 		Route::group(['middleware' => ['hasCompany']], function () {
 
-			Route::get('/home',function(Request $request){ return view('factum::factum.my-company');   });	
-			Route::get('/mi-empresa',function(Request $request){ return view('factum::factum.my-company');   });	
-			Route::get('/mi-cuenta',function(Request $request){ return view('factum::factum.my-account'); });	
+			Route::get('/home','My@myAccount');	
+			Route::get('/mi-cuenta','My@myAccount');
+			Route::get('/mi-empresa','My@myCompany');			
 			Route::get('/clientes',function(Request $request){ return view('factum::factum.customers'); });	
 			Route::get('/proveedores',function(Request $request){ return view('factum::factum.providers'); });		
 			Route::get('/ingresos',function(Request $request){ return view('factum::factum.incomes'); });		

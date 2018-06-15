@@ -71,7 +71,7 @@ class Company extends \VivaCMS\Models\Model
 			],			
 			"code" => [
 				"type" => "text",
-				"maxLength" => 64
+				"maxLength" => 32
 			],
 			"address" => [
 				"type" => "text",
@@ -146,7 +146,7 @@ class Company extends \VivaCMS\Models\Model
 				"email" => 'bail|nullable|email|max:128',
 				"telephone" => 'bail|nullable',
 				"name" => 'bail|required|max:64',
-				"code" => 'bail|required|max:64',
+				"code" => 'bail|required|max:32',
 				"address" => 'bail|nullable|max:128',
 				"city_id" => 'bail|nullable|exists:geo_cities,id',
 				"postal_code_id" => 'bail|nullable|exists:geo_postal_codes,id',
