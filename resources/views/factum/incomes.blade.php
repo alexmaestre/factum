@@ -37,7 +37,7 @@
 				<tbody>
 					@foreach ($incomes as $income)
 						<tr data-href="{{ layer_url() }}ingreso/{{ $income->id }}">
-							<td>{{ $income->id }}</td>
+							<td>{{ str_pad($income->code, 6, "0", STR_PAD_LEFT) }}</td>
 							<td>{{ $income->receiver->reference }}</td>
 							<td>{{ $income->name }}</td>
 							<td>{{ $income->items->count() }}</td>

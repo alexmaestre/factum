@@ -39,7 +39,7 @@ class Invoice extends \VivaCMS\Models\Model
      * @var array
      */
     protected $fillable = [
-        'company_id','receiver_company_id','date','name','base','taxes','total','status'
+        'company_id','receiver_company_id','date','code','name','base','taxes','total','status'
     ];	
 
     /**
@@ -76,6 +76,13 @@ class Invoice extends \VivaCMS\Models\Model
 			"date" => [
 				"type" => "date"
 			],	
+			"code" => [
+				"type" => "text",
+				"nullable" => true,
+				"minLength" => 1,
+				"maxLength" => 9,
+				"masks" => ["numeric"]
+			],
 			"name" => [
 				"type" => "text",
 				"minLength" => 2,
@@ -105,10 +112,11 @@ class Invoice extends \VivaCMS\Models\Model
 				"company_id" => 'bail|required|exists:companies,id',
 				"receiver_company_id" => 'bail|required|exists:companies,id',
 				"date" => 'bail|nullable|date_format:"d/m/Y"',
+				"code" => 'bail|numeric|min:1',
 				"name" => 'bail|required|max:64',
 				"base" => 'bail|required|regex:/^\d*(\.,\d{1,4})?$/|min:0',
 				"taxes" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0',
-				"total" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0',
+				"total" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0'
 			],
 			"messages" => [
 				"company_id.required" => 'Debe introducirse una empresa emisora',	
@@ -116,6 +124,8 @@ class Invoice extends \VivaCMS\Models\Model
 				"receiver_company_id.required" => 'Debe introducirse una empresa receptora',	
 				"receiver_company_id.exists" => 'La empresa receptora es incorrecta',
 				"date.date_format" => 'El formato de la fecha es incorrecto. Debe ser dd/mm/aaaa',
+				"code.numeric" => 'El código de factura tiene que tener un valor numérico',
+				"code.min" => 'El código de factura debe ser un número positivo',
 				"name.required" => 'Debe introducir un nombre para la factura',
 				"name.max" => 'El nombre de la factura no puede tener más de 64 caracteres',
 				"base.required" => 'Debe introducir la base imponible de la factura',
