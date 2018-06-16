@@ -1,10 +1,11 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-		@csss(
-		../admin/plugins/select2/css/select2.min.css,
-		../admin/plugins/select2/css/select2-bootstrap.min.css
-		)		
+	<title>Añadir cliente</title>
+	@csss(
+	../admin/plugins/select2/css/select2.min.css,
+	../admin/plugins/select2/css/select2-bootstrap.min.css
+	)		
 @stop
 
 @section('content')

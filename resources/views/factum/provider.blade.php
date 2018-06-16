@@ -1,7 +1,7 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-	<title>Mi empresa</title>
+	<title>{{ $provider->reference }}</title>
 	@csss(
 		../admin/plugins/select2/css/select2.min.css,
 		../admin/plugins/select2/css/select2-bootstrap.min.css

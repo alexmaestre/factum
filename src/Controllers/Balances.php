@@ -13,9 +13,19 @@ class Balances extends Controller{
      *
      * @return Response
      */
-    public function show()
+    public function balances()
     {
 		return view('factum::factum.balances');
+    }
+
+    /**
+     * Balance view
+     *
+     * @return Response
+     */
+    public function balance($year,$trim)
+    {
+		return view('factum::factum.balance')->with(['year'=>$year,'trim'=>$trim]);
     }	
 	
 }

@@ -1,5 +1,9 @@
 @extends('factum::factum/templates/login')
 
+@section('head')
+<title>Registro de usuario</title>
+@stop
+
 @section('content')
 <div class="container">
 	<form class="form-signin data-validation" method="post">

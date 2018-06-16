@@ -1,0 +1,28 @@
+.indicator{
+	color:white;
+	padding:30px;
+	font-size:20px;
+	border:solid 10px white;
+}
+
+.indicator i{
+	font-size:48px;
+	margin-bottom:10px;
+	display:block;
+}
+
+.steelblue{
+	background-color:#4682B4;
+}
+
+.darkgray{
+	background-color:#A9A9A9;
+}
+
+.mediumaquamarine{
+	background-color:#66CDAA;
+}
+
+.tomato{
+	background-color:#FF6347;
+}

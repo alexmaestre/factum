@@ -1,10 +1,11 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-@csss(
-	plugins/DataTables/datatables.min.css,
-	plugins/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css
-)
+	<title>Clientes</title>
+	@csss(
+		plugins/DataTables/datatables.min.css,
+		plugins/DataTables/DataTables-1.10.18/css/dataTables.bootstrap4.min.css
+	)
 @stop
 
 @section('content')

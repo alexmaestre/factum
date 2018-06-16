@@ -1,11 +1,12 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-		@csss(
-		../admin/plugins/select2/css/select2.min.css,
-		../admin/plugins/select2/css/select2-bootstrap.min.css,
-		../admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css
-		)		
+	<title>Añadir ingreso</title>
+	@csss(
+	../admin/plugins/select2/css/select2.min.css,
+	../admin/plugins/select2/css/select2-bootstrap.min.css,
+	../admin/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css
+	)		
 @stop
 
 @section('content')

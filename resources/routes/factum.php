@@ -37,7 +37,8 @@ Route::group(['middleware' => ['web'],'namespace' => 'Factum\Controllers'], func
 			Route::get('/gasto/{id}','Expenses@show')->where('model','[0-9]+');
 			Route::get('/gastos/nuevo','Expenses@create');			
 			Route::post('/gastos/nuevo','Expenses@store');									
-			Route::get('/balances','Balances@show');			
+			Route::get('/balances','Balances@balances');			
+			Route::get('/balance/{year}/{trim}','Balances@balance')->where(['year'=>'[0-9]+','trim'=>'[1-4]']);
 		});
 		
 		//Logout

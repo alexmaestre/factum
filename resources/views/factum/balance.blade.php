@@ -1,31 +1,17 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-	<title>Balance global</title>
+	<title>Balance Trimestre {{$trim}} de {{$year}}</title>
 	@csss(
 		css/balances.css
-	)	
+	)
 @stop
 
 @section('content')
 	<div class="row mb-3">
 		<div class="col-12">
-			<h2 class="float-left">Balances</h2>
-		</div>
-	</div>
-	
-	<div class="row mb-3">
-		<div class="col-12">
-			<p>
-				<a href="{{layer_url()}}balance/2017/1"><button class="btn btn-primary btn-sm mb-2">2017 TRIM 1</button></a>
-				<a href="{{layer_url()}}balance/2017/2"><button class="btn btn-primary btn-sm mb-2">2017 TRIM 2</button></a>
-				<a href="{{layer_url()}}balance/2017/3"><button class="btn btn-primary btn-sm mb-2">2017 TRIM 3</button></a>
-				<a href="{{layer_url()}}balance/2017/4"><button class="btn btn-primary btn-sm mb-2">2017 TRIM 4</button></a>
-				<a href="{{layer_url()}}balance/2018/1"><button class="btn btn-primary btn-sm mb-2">2018 TRIM 1</button></a>
-				<a href="{{layer_url()}}balance/2018/2"><button class="btn btn-primary btn-sm mb-2">2018 TRIM 2</button></a>
-				<button class="btn btn-sm mb-2">2018 TRIM 3</button>
-				<button class="btn btn-sm mb-2">2018 TRIM 4</button>
-			</p>
+			<h2 class="float-left">Balance Trimestre {{$trim}} de {{$year}}</h2>
+			<a href="{{ layer_url() }}balances" class="float-left"><button class="btn btn-lg btn-primary ml-3"><i class="fa fa-arrow-left"></i></button></a>
 		</div>
 	</div>
 	
@@ -63,12 +49,12 @@
 			<i class="fa fa-university"></i>
 			{{($i-$e)*0.21}}€ IVA
 		</div>
-	</div>
+	</div>	
 	
 	<div class="row">
 		<div class="col-sm-6 col-12"><canvas id="incomes_expenses"></canvas></div>
 		<div class="col-sm-6 col-12"><canvas id="sales_purchases"></canvas></div>
-	</div>
+	</div>	
 	
 @stop
 
@@ -83,7 +69,7 @@
 	new Chart(canvas1, {
 		type: 'line',
 		data: {
-			labels: ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
+			labels: ['SEM1','SEM2','SEM3','SEM4','SEM5','SEM6','SEM7','SEM8','SEM9','SEM10','SEM11','SEM12'],
 			datasets: [{
 				label: 'Ventas',
 				backgroundColor: '#4682B4',
@@ -133,7 +119,7 @@
 	new Chart(canvas2, {
 		type: 'line',
 		data: {
-			labels: ['ENE','FEB','MAR','ABR','MAY','JUN','JUL','AGO','SEP','OCT','NOV','DIC'],
+			labels: ['SEM1','SEM2','SEM3','SEM4','SEM5','SEM6','SEM7','SEM8','SEM9','SEM10','SEM11','SEM12'],
 			datasets: [{
 				label: 'Ingresos',
 				backgroundColor: '#66CDAA',
@@ -180,5 +166,5 @@
 			}
 		}
 	});	
-	</script>	
+	</script>
 @stop

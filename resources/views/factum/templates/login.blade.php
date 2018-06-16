@@ -6,7 +6,6 @@
 <!--<![endif]-->
 	<head>
 		<meta charset="utf-8"/>
-		<title>Factum</title>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta content="width=device-width, initial-scale=1" name="viewport"/>	
 		@csss(
@@ -19,7 +18,8 @@
 		../admin/plugins/select2/css/select2.min.css,
 		../admin/plugins/select2/css/select2-bootstrap.min.css,
 		css/login.css
-		)					
+		)	
+		@yield('head')
 	</head>
 
 	<body>		

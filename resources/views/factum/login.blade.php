@@ -1,5 +1,9 @@
 @extends('factum::factum/templates/login')
 
+@section('head')
+<title>Factum - Plataforma de facturación</title>
+@stop
+
 @section('content')
 <div class="container">
 	<form class="form-signin" method="post">
