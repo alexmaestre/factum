@@ -6,7 +6,7 @@
 	{
 		"params": {
 			"id" : 1,
-			"user_id" : null,
+			"user_id" : 2,
 			"reference" : "Cárnicas López",
 			"email" : "info@carnicaslopez.com",
 			"telephone" : "944564555",
@@ -21,13 +21,73 @@
 	{
 		"params": {
 			"id" : 2,
-			"user_id" : 2,
+			"user_id" : null,
 			"reference" : "Supermercados Rai",
 			"email" : "info@supermercados-rai.com",
 			"telephone" : "900393922",
 			"name" : "Rai Trans 2000 SA",
 			"code" : "G12399411",
+			"address" : "C/Licenciado Pozas 40",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"vat_id" : 1
+		}
+	},	
+	{
+		"params": {
+			"id" : 3,
+			"user_id" : null,
+			"reference" : "Piscifactorías Nei",
+			"email" : "contacto@pisnei.com",
+			"telephone" : "902232312",
+			"name" : "Nei Pisci SA",
+			"code" : "E28392312",
+			"address" : "C/Licenciado Pozas 46",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"vat_id" : 1
+		}
+	},	
+	{
+		"params": {
+			"id" : 4,
+			"user_id" : null,
+			"reference" : "Alcampo Bilbao",
+			"email" : "bilbao@supermercados-alcampo.com",
+			"telephone" : "944505032",
+			"name" : "Alcampo SA",
+			"code" : "G20282999",
+			"address" : "Av. Sabino Arana 40",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"vat_id" : 1
+		}
+	},	
+	{
+		"params": {
+			"id" : 5,
+			"user_id" : null,
+			"reference" : "Bilbo Horno",
+			"email" : "bilbohorno@gmail.com",
+			"telephone" : "94433187",
+			"name" : "Bilbo Horno SL",
+			"code" : "G23119411",
 			"address" : "C/María Díaz de Haro 3",
+			"city_id" : 7495,
+			"postal_code_id" : 10435,
+			"vat_id" : 1
+		}
+	},	
+	{
+		"params": {
+			"id" : 6,
+			"user_id" : null,
+			"reference" : "Eroski City Arias",
+			"email" : "denda@eroskicityarias.eus",
+			"telephone" : "946565622",
+			"name" : "Eroski City Arias SL",
+			"code" : "G28289112",
+			"address" : "C/Rodriguez Arias 72",
 			"city_id" : 7495,
 			"postal_code_id" : 10435,
 			"vat_id" : 1
@@ -35,12 +95,12 @@
 	},
 	{
 		"params": {
-			"id" : 3,
+			"id" : 7,
 			"user_id" : 1,
-			"reference" : "Distribuidor Carnic",
-			"email" : "kaixo@carnic.eus",
+			"reference" : "DistriCash",
+			"email" : "districash@districash.es",
 			"telephone" : "944550022",
-			"name" : "Carnic SL",
+			"name" : "DistriCash SL",
 			"code" : "G29349422",
 			"address" : "C/Gran Vía 85",
 			"city_id" : 7495,
@@ -50,11 +110,27 @@
 		"relations": [
 		{
 			"relation": "customers",
+			"object": 2
+		},
+		{
+			"relation": "customers",
+			"object": 4
+		},
+		{
+			"relation": "customers",
+			"object": 6
+		},
+		{
+			"relation": "providers",
 			"object": 1
 		},
 		{
 			"relation": "providers",
-			"object": 2
+			"object": 3
+		},
+		{
+			"relation": "providers",
+			"object": 5
 		},
 		{
 			"relation": "incomes",

@@ -27,7 +27,8 @@ class Incomes extends Controller{
      */
     public function create()
     {
-		return view('factum::factum.income_create')->with('income',new Invoice());
+		$c = Company::where('user_id',\Auth::user()->id)->with(['customers' => function($query){ $query->orderBy('reference', 'asc'); }])->first();
+		return view('factum::factum.income_create')->with(['income'=>new Invoice(),'company'=>$c]);
     }	
 	
     /**
@@ -37,7 +38,8 @@ class Incomes extends Controller{
      */
     public function show($id)
     {
-		return view('factum::factum.income')->with('income',Invoice::where('id',$id)->first());
+		$c = Company::where('user_id',\Auth::user()->id)->with(['customers' => function($query){ $query->orderBy('reference', 'asc'); }])->first();
+		return view('factum::factum.income')->with(['income'=>Invoice::where('id',$id)->first(),'company'=>$c]);
     }	
 	
     /**

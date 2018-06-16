@@ -27,7 +27,8 @@ class Expenses extends Controller{
      */
     public function create()
     {
-		return view('factum::factum.expense_create')->with('expense',new Invoice());
+		$c = Company::where('user_id',\Auth::user()->id)->with(['providers' => function($query){ $query->orderBy('reference', 'asc'); }])->first();
+		return view('factum::factum.expense_create')->with(['expense'=>new Invoice(),'company'=>$c]);
     }	
 	
     /**
@@ -37,7 +38,8 @@ class Expenses extends Controller{
      */
     public function show($id)
     {
-		return view('factum::factum.expense')->with('expense',Invoice::where('id',$id)->first());
+		$c = Company::where('user_id',\Auth::user()->id)->with(['providers' => function($query){ $query->orderBy('reference', 'asc'); }])->first();
+		return view('factum::factum.expense')->with(['expense'=>Invoice::where('id',$id)->first(),'company'=>$c]);
     }	
 	
     /**

@@ -26,7 +26,15 @@
 				{!!	$expense->setInputTemplate('factum::factum/forms'); !!}
 				{!!	$expense->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
 				{!!	$expense->getInput(['param'=>'code','placeholder'=>'Código o numeración']) !!}
-				{!!	$expense->getInput(['param'=>'company_id','placeholder'=>'Proveedor',"options"=>[""=>"Seleccionar empresa emisora"]]) !!}
+				<div class="input-icon input-group right mb-2">
+					<label for="invoice[company_id]" class="sr-only">Proveedor</label>
+					<select class="form-control select2" id="invoice[company_id]" name="invoice[company_id]">
+						<option value="">Seleccionar proveedor</option>
+						@foreach($company->providers as $provider)
+						<option value="{{$provider->id}}" @if($provider->id == $expense->company_id) selected @endif>{{$provider->reference}}</option>
+						@endforeach
+					</select>
+				</div>
 				{!!	$expense->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Añadir gasto</button>
 			</form>		

@@ -26,7 +26,15 @@
 				{!!	$income->setInputTemplate('factum::factum/forms'); !!}
 				{!!	$income->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
 				{!!	$income->getInput(['param'=>'code','placeholder'=>'Código o numeración']) !!}
-				{!!	$income->getInput(['param'=>'company_id','placeholder'=>'Proveedor',"options"=>[""=>"Seleccionar empresa receptora"]]) !!}
+				<div class="input-icon input-group right mb-2">
+					<label for="invoice[company_id]" class="sr-only">Cliente</label>
+					<select class="form-control select2" id="invoice[company_id]" name="invoice[company_id]">
+						<option value="">Seleccionar cliente</option>
+						@foreach($company->customers as $customer)
+						<option value="{{$customer->id}}" @if($customer->id == $income->receiver_company_id) selected @endif>{{$customer->reference}}</option>
+						@endforeach
+					</select>
+				</div>
 				{!!	$income->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Añadir ingreso</button>
 			</form>		
