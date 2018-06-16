@@ -23,7 +23,7 @@
 			<table class="table table-striped table-bordered table-hover table-checkable" data-datatable="true" data-datatable-plural="proveedores" data-datatable-length="500" style="width:100%">
 				<thead>
 					<tr>
-						<th>ID</th>
+						<th>Factura</th>
 						<th>Cliente</th>
 						<th>Nombre</th>
 						<th>Conceptos</th>
@@ -37,7 +37,7 @@
 				<tbody>
 					@foreach ($incomes as $income)
 						<tr data-href="{{ layer_url() }}ingreso/{{ $income->id }}">
-							<td>{{ str_pad($income->code, 6, "0", STR_PAD_LEFT) }}</td>
+							<td>{{ $income->code }}</td>
 							<td>{{ $income->receiver->reference }}</td>
 							<td>{{ $income->name }}</td>
 							<td>{{ $income->items->count() }}</td>

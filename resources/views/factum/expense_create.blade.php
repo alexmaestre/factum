@@ -25,6 +25,7 @@
 				<input type="hidden" name="_add_callback_url" value="gastos">				
 				{!!	$expense->setInputTemplate('factum::factum/forms'); !!}
 				{!!	$expense->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
+				{!!	$expense->getInput(['param'=>'code','placeholder'=>'Código o numeración']) !!}
 				{!!	$expense->getInput(['param'=>'company_id','placeholder'=>'Proveedor',"options"=>[""=>"Seleccionar empresa emisora"]]) !!}
 				{!!	$expense->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Añadir gasto</button>

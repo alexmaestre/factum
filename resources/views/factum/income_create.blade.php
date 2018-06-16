@@ -25,6 +25,7 @@
 				<input type="hidden" name="_add_callback_url" value="ingresos">				
 				{!!	$income->setInputTemplate('factum::factum/forms'); !!}
 				{!!	$income->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
+				{!!	$income->getInput(['param'=>'code','placeholder'=>'Código o numeración']) !!}
 				{!!	$income->getInput(['param'=>'company_id','placeholder'=>'Proveedor',"options"=>[""=>"Seleccionar empresa receptora"]]) !!}
 				{!!	$income->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
 				<button class="btn btn-lg btn-primary btn-block" type="submit">Añadir ingreso</button>

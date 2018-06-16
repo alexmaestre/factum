@@ -1,7 +1,7 @@
 @extends('factum::factum/templates/index')
 
 @section('head')
-	<title>Factura {{ str_pad($income->code, 6, "0", STR_PAD_LEFT) }}: {{ $income->name }}</title>
+	<title>Factura {{ $income->code }}: {{ $income->name }}</title>
 	@csss(
 		../admin/plugins/select2/css/select2.min.css,
 		../admin/plugins/select2/css/select2-bootstrap.min.css,
@@ -12,7 +12,7 @@
 @section('content')
 	<div class="row mb-3">
 		<div class="col-12">
-			<h2 class="float-left">Factura {{ str_pad($income->code, 6, "0", STR_PAD_LEFT) }}: {{ $income->name }}</h2>
+			<h2 class="float-left">Factura {{ $income->code }}: {{ $income->name }}</h2>
 			<a href="{{ layer_url() }}ingresos" class="float-left"><button class="btn btn-lg btn-primary ml-3"><i class="fa fa-arrow-left"></i></button></a>
 		</div>
 	</div>
@@ -23,6 +23,7 @@
 				<input type="hidden" name="_token" value="{{ csrf_token() }}">		
 				{!!	$income->setInputTemplate('factum::factum/forms'); !!}
 				{!!	$income->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
+				{!!	$income->getInput(['param'=>'code','placeholder'=>'Código o numeración']) !!}
 				{!!	$income->getInput(['param'=>'company_id','placeholder'=>'Proveedor',"options"=>[""=>"Seleccionar empresa receptora"]]) !!}
 				{!!	$income->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
 			</form>

@@ -78,10 +78,7 @@ class Invoice extends \VivaCMS\Models\Model
 			],	
 			"code" => [
 				"type" => "text",
-				"nullable" => true,
-				"minLength" => 1,
-				"maxLength" => 9,
-				"masks" => ["numeric"]
+				"maxLength" => 32
 			],
 			"name" => [
 				"type" => "text",
@@ -112,7 +109,7 @@ class Invoice extends \VivaCMS\Models\Model
 				"company_id" => 'bail|required|exists:companies,id',
 				"receiver_company_id" => 'bail|required|exists:companies,id',
 				"date" => 'bail|nullable|date_format:"d/m/Y"',
-				"code" => 'bail|numeric|min:1',
+				"code" => 'bail|required|min:1|max:32',
 				"name" => 'bail|required|max:64',
 				"base" => 'bail|required|regex:/^\d*(\.,\d{1,4})?$/|min:0',
 				"taxes" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0',
@@ -124,8 +121,8 @@ class Invoice extends \VivaCMS\Models\Model
 				"receiver_company_id.required" => 'Debe introducirse una empresa receptora',	
 				"receiver_company_id.exists" => 'La empresa receptora es incorrecta',
 				"date.date_format" => 'El formato de la fecha es incorrecto. Debe ser dd/mm/aaaa',
-				"code.numeric" => 'El código de factura tiene que tener un valor numérico',
-				"code.min" => 'El código de factura debe ser un número positivo',
+				"code.required" => 'Debe introducir el código o numeración de la factura',
+				"code.max" => 'El código o numeración de la factura no puede tener más de 32 caracteres',
 				"name.required" => 'Debe introducir un nombre para la factura',
 				"name.max" => 'El nombre de la factura no puede tener más de 64 caracteres',
 				"base.required" => 'Debe introducir la base imponible de la factura',

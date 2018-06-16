@@ -113,13 +113,13 @@
 					},
 					{
 						"name" : "code",
-						"type" : "mediumInteger"
+						"type" : "string",
+						"size" : 32
 					},
 					{
 						"name" : "name",
 						"type" : "string",
-						"size" : 128,
-						"maxlength" : 128
+						"size" : 128
 					},
 					{
 						"name" : "base",

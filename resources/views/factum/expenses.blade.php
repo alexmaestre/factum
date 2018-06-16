@@ -23,8 +23,8 @@
 			<table class="table table-striped table-bordered table-hover table-checkable" data-datatable="true" data-datatable-plural="proveedores" data-datatable-length="500" style="width:100%">
 				<thead>
 					<tr>
+						<th>Factura</th>					
 						<th>Proveedor</th>
-						<th>ID</th>
 						<th>Nombre</th>
 						<th>Conceptos</th>
 						<th>Fecha</th>
@@ -37,8 +37,8 @@
 				<tbody>
 					@foreach ($expenses as $expense)
 						<tr data-href="{{ layer_url() }}gasto/{{ $expense->id }}">
+							<td>{{ $expense->code }}</td>
 							<td>{{ $expense->company->reference }}</td>
-							<td>{{ str_pad($income->code, 6, "0", STR_PAD_LEFT) }}</td>
 							<td>{{ $expense->name }}</td>
 							<td>{{ $expense->items->count() }}</td>
 							<td>{{ $expense->date->format(config('layer')->language->date_format) }}</td>
