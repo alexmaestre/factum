@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use VivaCMS\Models\User;
 use Factum\Models\Company;
 use Factum\Models\Invoice;
+use Factum\Models\InvoiceItem;
 
 class Incomes extends Controller{
 
@@ -49,7 +50,7 @@ class Incomes extends Controller{
      */
     public function shareInvoice($code,$id)
     {
-		$invoice = Invoice::where('id',$id)->first();
+		$invoice = Invoice::find($id);
 		if(empty($invoice) || md5($invoice->receiver->code.$invoice->receiver->created_at) != $code){ return redirect(layer_url())->withErrors('La factura indicada no existe'); };
 		$pdf = \App::make('dompdf.wrapper');
 		$pdf->loadHTML(view('factum::factum.invoice_pdf')->with(['income'=>Invoice::where('id',$id)->first()]));
@@ -70,10 +71,12 @@ class Incomes extends Controller{
 			if($create === false){ 
 				return back()->withErrors($i->error)->withInput();
 			};
-			return redirect(layer_url().'ingreso/'.$id);
+			return redirect();
 		}
 		if($request->get('_action') == 'delete-item'){
-			echo 'delete-item';
+			$i = InvoiceItem::find($request->get('item'));
+			$i->delete();
+			return redirect();
 		}
     }		
 	
@@ -91,7 +94,7 @@ class Incomes extends Controller{
 		if($create === false){ 
 			return back()->withErrors($i->error)->withInput();
 		};	
-		return redirect(layer_url().'ingresos/'.$create->id);
+		return redirect(layer_url().'ingreso/'.$create->id);
     }		
 	
 	

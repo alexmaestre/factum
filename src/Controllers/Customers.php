@@ -37,7 +37,7 @@ class Customers extends Controller{
      */
     public function show($id)
     {
-		return view('factum::factum.customer')->with('customer',Company::where('id',$id)->first());
+		return view('factum::factum.customer')->with('customer',Company::find($id)));
     }		
 	
     /**
@@ -54,7 +54,7 @@ class Customers extends Controller{
 		};	
 		$userCompany = Company::where('user_id',\Auth::user()->id)->first();
 		$userCompany->customers()->attach($create->id);
-		return redirect(layer_url().'clientes');	
+		return redirect(layer_url().'clientes');
     }		
 	
 	

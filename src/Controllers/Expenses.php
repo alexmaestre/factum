@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use VivaCMS\Models\User;
 use Factum\Models\Company;
 use Factum\Models\Invoice;
+use Factum\Models\InvoiceItem;
 
 class Expenses extends Controller{
 
@@ -56,10 +57,12 @@ class Expenses extends Controller{
 			if($create === false){ 
 				return back()->withErrors($i->error)->withInput();
 			};
-			return redirect(layer_url().'gasto/'.$id);
+			return redirect()->back();
 		}
 		if($request->get('_action') == 'delete-item'){
-			echo 'delete-item';
+			$i = InvoiceItem::find($request->get('item'));
+			$i->delete();
+			return redirect()->back();
 		}
     }	
 	

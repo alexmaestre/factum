@@ -195,7 +195,7 @@ class Invoice extends \VivaCMS\Models\Model
     /**
      * Update taxes and total when invoice is saved
      *
-     * @return Calculate
+     * @return void
      */	
     public function save(array $options = [])
     {

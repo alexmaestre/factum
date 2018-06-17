@@ -37,7 +37,7 @@ class Providers extends Controller{
      */
     public function show($id)
     {
-		return view('factum::factum.provider')->with('provider',Company::where('id',$id)->first());
+		return view('factum::factum.provider')->with('provider',Company::find($id));
     }	
 	
     /**

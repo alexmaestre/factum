@@ -42,6 +42,29 @@
 	
 	<div class="row mt-3 mb-1">
 		<div class="col-12">
+			<table class="table table-bordered table-hover table-checkable">
+				<thead>
+					<tr>
+						<th>Base imponible</td>
+						<th>Tasa impositiva</td>
+						<th>Impuestos</td>
+						<th>Total</td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>{{ number_format($income->base,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
+						<td>{{ $income->company->vat->translation->name }}</td>
+						<td>{{ number_format($income->taxes,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
+						<td>{{ number_format($income->total,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+	
+	<div class="row mt-3 mb-1">
+		<div class="col-12">
 			<h2 class="float-left">Conceptos</h2>
 			<button class="btn btn-lg btn-primary ml-3" data-toggle="modal" data-target="#addItem"><i class="fa fa-plus"></i></button>
 		</div>
@@ -92,14 +115,18 @@
 							<td>{{ number_format($item->base,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
 							<td>{{ number_format($item->taxes,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
 							<td>{{ number_format($item->total,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
-							<td data-no-href="true">
-								<button class="btn btn-xs btn-primary pull-center deleteButton" 
-								data-type="error" 
-								data-title="¿Estás seguro de querer eliminarlo?" 
-								data-message="El concepto será eliminado"
-								data-model="invoice_items"
-								data-id="{{$item->id}}"
-								><i class="fa fa-trash"></i></button>
+							<td>
+								<form method="post">
+									<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+									<input type="hidden" name="_action" value="delete-item">									
+									<input type="hidden" name="item" value="{{ $item->id }}">
+									<button type="button" class="btn btn-xs btn-primary pull-center deleteButton" 
+									data-type="error" 
+									data-title="¿Estás seguro de querer eliminarlo?" 
+									data-message="El concepto será eliminado"
+									data-no-ajax="true"
+									><i class="fa fa-trash"></i></button>
+								</form>
 							</td>	
 						</tr>
 					@endforeach
