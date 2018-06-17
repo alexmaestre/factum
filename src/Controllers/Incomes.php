@@ -42,7 +42,25 @@ class Incomes extends Controller{
 		$c = Company::where('user_id',\Auth::user()->id)->with(['customers' => function($query){ $query->orderBy('reference', 'asc'); }])->first();
 		return view('factum::factum.income')->with(['income'=>Invoice::where('id',$id)->first(),'company'=>$c]);
     }	
+		
 	
+    /**
+     * Provider store operation
+     *
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+		$i = new InvoiceController();
+		$c = Company::where('user_id',\Auth::user()->id)->first();
+		$m = array_merge($request->get('invoice'),["company_id" => $c->id]);
+		$create = $i->createObject($i->model,$m);
+		if($create === false){ 
+			return back()->withErrors($i->error)->withInput();
+		};	
+		return redirect(layer_url().'ingreso/'.$create->id);
+    }		
+
     /**
      * Share invoice view
      *
@@ -78,24 +96,6 @@ class Incomes extends Controller{
 			$i->delete();
 			return redirect();
 		}
-    }		
-	
-    /**
-     * Provider store operation
-     *
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-		$i = new InvoiceController();
-		$c = Company::where('user_id',\Auth::user()->id)->first();
-		$m = array_merge($request->get('invoice'),["company_id" => $c->id]);
-		$create = $i->createObject($i->model,$m);
-		if($create === false){ 
-			return back()->withErrors($i->error)->withInput();
-		};	
-		return redirect(layer_url().'ingreso/'.$create->id);
-    }		
-	
+    }	
 	
 }

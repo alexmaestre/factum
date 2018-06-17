@@ -64,7 +64,8 @@ class InstallCommand extends Command
 		$startTime = microtime(true);
 				
 		$this->comment(PHP_EOL."Creando capas");
-		InstallationManager::createLayers($this->layers);	
+		InstallationManager::createLayers($this->layers);
+		$this->info("Capa(s) creada(s)");			
 		
 		$this->comment(PHP_EOL."Cargando tabla(s)");
 		InstallationManager::installSchema($this->schemas);	

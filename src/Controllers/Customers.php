@@ -37,7 +37,7 @@ class Customers extends Controller{
      */
     public function show($id)
     {
-		return view('factum::factum.customer')->with('customer',Company::find($id)));
+		return view('factum::factum.customer')->with('customer',Company::find($id));
     }		
 	
     /**
