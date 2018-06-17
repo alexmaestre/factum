@@ -9,7 +9,8 @@
     ],
 	"require": {
 		"php": ">=7.0.0",
-		"alexmaestre/vivacms" : "*"
+		"alexmaestre/vivacms" : "*",
+		"barryvdh/laravel-dompdf" : "*"
     },
     "autoload": {
         "psr-4": {

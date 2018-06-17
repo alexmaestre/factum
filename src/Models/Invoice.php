@@ -86,19 +86,19 @@ class Invoice extends \VivaCMS\Models\Model
 				"maxLength" => 128,
 			],
 			"base" => [
-				"type" => "text",
+				"type" => "money",
 				"maxLength" => 12,
-				"masks" => ["coordinate"]
+				"masks" => ["money"]
 			],	
 			"taxes" => [
-				"type" => "text",
+				"type" => "money",
 				"maxLength" => 12,
-				"masks" => ["coordinate"]
+				"masks" => ["money"]
 			],	
 			"total" => [
-				"type" => "text",
+				"type" => "money",
 				"maxLength" => 12,
-				"masks" => ["coordinate"]
+				"masks" => ["money"]
 			],				
 			"status" => [
 				"type" => "boolean"
@@ -111,9 +111,9 @@ class Invoice extends \VivaCMS\Models\Model
 				"date" => 'bail|nullable|date_format:"d/m/Y"',
 				"code" => 'bail|required|min:1|max:32',
 				"name" => 'bail|required|max:64',
-				"base" => 'bail|required|regex:/^\d*(\.,\d{1,4})?$/|min:0',
-				"taxes" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0',
-				"total" => 'bail|nullable|regex:/^\d*(\.,\d{1,4})?$/|min:0'
+				"base" => 'bail|nullable|regex:/^\d*([.,]\d{1,4})?$/|min:0',
+				"taxes" => 'bail|nullable|regex:/^\d*([.,]\d{1,4})?$/|min:0',
+				"total" => 'bail|nullable|regex:/^\d*([.,]\d{1,4})?$/|min:0'
 			],
 			"messages" => [
 				"company_id.required" => 'Debe introducirse una empresa emisora',	
@@ -125,7 +125,6 @@ class Invoice extends \VivaCMS\Models\Model
 				"code.max" => 'El código o numeración de la factura no puede tener más de 32 caracteres',
 				"name.required" => 'Debe introducir un nombre para la factura',
 				"name.max" => 'El nombre de la factura no puede tener más de 64 caracteres',
-				"base.required" => 'Debe introducir la base imponible de la factura',
 				"base.regex" => 'La base imponible de la factura debe ser un número con hasta 4 decimales',
 				"base.min" => 'La base imponible de la factura debe ser un número mayor que cero',
 				"taxes.regex" => 'La cuota impositiva de la factura debe ser un número con hasta 4 decimales',
@@ -164,6 +163,44 @@ class Invoice extends \VivaCMS\Models\Model
     public function items()
 	{
         return $this->hasMany(InvoiceItem::class);
+    }	
+	
+    /**
+     * Recalculate based on items
+     *
+     * @return string
+     */	
+    public function recalculate()
+    {
+		$base = 0;
+        foreach($this->items as $item){
+			$base = $base + $item->base;
+		}
+        $this->base = $base;
+		$this->calculateTaxesAndTotal();
+		parent::save();
+    }	
+	
+    /**
+     * Calculat taxes and total
+     *
+     * @return void
+     */	
+    public function calculateTaxesAndTotal()
+    {
+        $this->taxes = $this->base * ($this->receiver->vat->value/100);
+        $this->total = $this->base + $this->taxes;
+    }	
+	
+    /**
+     * Update taxes and total when invoice is saved
+     *
+     * @return Calculate
+     */	
+    public function save(array $options = [])
+    {
+		$this->calculateTaxesAndTotal();
+        parent::save();
     }	
 	
 }

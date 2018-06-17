@@ -27,7 +27,9 @@
 		
 		<button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
 		
-		<a class="btn btn-lg btn-block" href="{{layer_url()}}registro">Crear cuenta</a>
+		<a class="btn btn-lg btn-block" href="{{layer_url()}}registro">Crear cuenta</a> 
+		
+		<a class="btn btn-lg btn-block" href="{{layer_url()}}recuperar-clave">Recuperar clave</a>
 	</form>
 </div>
 @stop

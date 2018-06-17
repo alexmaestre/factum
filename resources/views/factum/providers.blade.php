@@ -23,10 +23,12 @@
 			<table class="table table-striped table-bordered table-hover table-checkable" data-datatable="true" data-datatable-plural="proveedores" data-datatable-length="500" style="width:100%">
 				<thead>
 					<tr>
-						<th>ID</th>
 						<th>Nombre de referencia</th>
-						<th>Nombre fiscal</th>
 						<th>NIF</th>
+						<th>Nombre fiscal</th>						
+						<th>Ciudad</th>
+						<th>CP</th>
+						<th>Teléfono</th>
 						<th>Tasa aplicable</th>
 						<th>Acciones</th>
 					</tr>
@@ -34,10 +36,12 @@
 				<tbody>
 					@foreach ($providers as $provider)
 						<tr data-href="{{ layer_url() }}proveedor/{{ $provider->id }}">
-							<td>{{ $provider->id }}</td>
 							<td>{{ $provider->reference }}</td>
+							<td>{{ $provider->code }}</td>							
 							<td>{{ $provider->name }}</td>
-							<td>{{ $provider->code }}</td>
+							<td>{{ @$provider->city->translation->name }}</td>
+							<td>{{ @$provider->postal_code->code }}</td>
+							<td>{{ @$provider->telephone }}</td>							
 							<td>{{ $provider->vat->translation->name }}</td>	
 							<td data-no-href="true">
 							@if($provider->incomes->isEmpty() && $provider->expenses->isEmpty()) 

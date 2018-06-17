@@ -43,22 +43,55 @@ class Incomes extends Controller{
     }	
 	
     /**
+     * Share invoice view
+     *
+     * @return Response
+     */
+    public function shareInvoice($code,$id)
+    {
+		$invoice = Invoice::where('id',$id)->first();
+		if(empty($invoice) || md5($invoice->receiver->code.$invoice->receiver->created_at) != $code){ return redirect(layer_url())->withErrors('La factura indicada no existe'); };
+		$pdf = \App::make('dompdf.wrapper');
+		$pdf->loadHTML(view('factum::factum.invoice_pdf')->with(['income'=>Invoice::where('id',$id)->first()]));
+		return $pdf->stream();
+    }		
+	
+    /**
+     * Income post operations (delete and create item)
+     *
+     * @return Response
+     */
+    public function post($id,Request $request)
+    {
+		if($request->get('_action') == 'create-item'){
+			$i = new InvoiceItemController();
+			$m = array_merge($request->get('item'),["invoice_id" => $id]);
+			$create = $i->createObject($i->model,$m);
+			if($create === false){ 
+				return back()->withErrors($i->error)->withInput();
+			};
+			return redirect(layer_url().'ingreso/'.$id);
+		}
+		if($request->get('_action') == 'delete-item'){
+			echo 'delete-item';
+		}
+    }		
+	
+    /**
      * Provider store operation
      *
      * @return Response
      */
     public function store(Request $request)
     {
-		/*
-		$c = new CompanyController();
-		$create = $c->createObject($c->model,$request->get('company'));
+		$i = new InvoiceController();
+		$c = Company::where('user_id',\Auth::user()->id)->first();
+		$m = array_merge($request->get('invoice'),["company_id" => $c->id]);
+		$create = $i->createObject($i->model,$m);
 		if($create === false){ 
-			return back()->withErrors($c->error)->withInput();
+			return back()->withErrors($i->error)->withInput();
 		};	
-		$userCompany = Company::where('user_id',\Auth::user()->id)->first();
-		$userCompany->providers()->attach($create->id);
-		return redirect(layer_url().'proveedores');	
-		*/
+		return redirect(layer_url().'ingresos/'.$create->id);
     }		
 	
 	

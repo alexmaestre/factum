@@ -30,14 +30,30 @@
 					<li class="sidebar-brand">
 						<a href="{{ layer_url() }}"><b>Factum</b></a><i class="fa fa-bars" id="menu-toggle"></i>
 					</li>
-					<li><a href="{{ layer_url() }}mi-cuenta"><i class="fa fa-fw fa-user"></i> Mi cuenta</a></li>
-					<li><a href="{{ layer_url() }}mi-empresa"><i class="fa fa-fw fa-industry"></i> Mi empresa</a></li>
-					<li><a href="{{ layer_url() }}clientes"><i class="fa fa-fw fa-users"></i> Clientes</a></li>
-					<li><a href="{{ layer_url() }}proveedores"><i class="fa fa-fw fa-truck"></i> Proveedores</a></li>
-					<li><a href="{{ layer_url() }}ingresos"><i class="fa fa-fw fa-file-alt"></i> Ingresos</a></li>
-					<li><a href="{{ layer_url() }}gastos"><i class="fa fa-fw fa-shopping-basket"></i> Gastos</a></li>
-					<li><a href="{{ layer_url() }}balances"><i class="fa fa-fw fa-chart-area"></i> Balances</a></li>
-					<li><a href="{{ layer_url() }}logout"><i class="fa fa-fw fa-sign-out-alt"></i> Salir</a></li>
+					<li data-active-factum-my-account>
+						<a href="{{ layer_url() }}mi-cuenta"><i class="fa fa-fw fa-user"></i> Mi cuenta</a>
+					</li>
+					<li data-active-factum-my-company>
+						<a href="{{ layer_url() }}mi-empresa"><i class="fa fa-fw fa-industry"></i> Mi empresa</a>
+					</li>
+					<li data-active-factum-customer data-active-factum-customers data-active-factum-customer_create>
+						<a href="{{ layer_url() }}clientes"><i class="fa fa-fw fa-users"></i> Clientes</a>
+					</li>
+					<li data-active-factum-provider data-active-factum-providers data-active-factum-provider_create>
+						<a href="{{ layer_url() }}proveedores"><i class="fa fa-fw fa-truck"></i> Proveedores</a>
+					</li>
+					<li data-active-factum-income data-active-factum-incomes data-active-factum-income_create>
+						<a href="{{ layer_url() }}ingresos"><i class="fa fa-fw fa-file-alt"></i> Ingresos</a>
+					</li>
+					<li data-active-factum-expense data-active-factum-expenses data-active-factum-expense_create>
+						<a href="{{ layer_url() }}gastos"><i class="fa fa-fw fa-shopping-basket"></i> Gastos</a>
+					</li>
+					<li data-active-factum-balances data-active-factum-balance>
+						<a href="{{ layer_url() }}balances"><i class="fa fa-fw fa-chart-area"></i> Balances</a>
+					</li>
+					<li>
+						<a href="{{ layer_url() }}logout"><i class="fa fa-fw fa-sign-out-alt"></i> Salir</a>
+					</li>
 					
 				</ul>
 			</div>
@@ -70,7 +86,11 @@
 				e.preventDefault();
 				$("#wrapper").toggleClass("toggled");
 				if($("#wrapper").hasClass("toggled")){ Cookies.set('menu',1); }else{ Cookies.set('menu',0); };
-			});			
+			});		
+
+			@if(!empty($viewName))
+				$('.sidebar-nav li[data-active-{{$viewName}}]').addClass('active');
+			@endif			
 			
 			$(document).ready(function() {	
 				@if(session('notifications'))

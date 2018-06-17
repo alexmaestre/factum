@@ -14,7 +14,7 @@
 @section('content')
 	<div class="row mb-3">
 		<div class="col-12">
-			<h2 class="float-left">Datos de la factura {{ $expense->code }}</h2>
+			<h2 class="float-left">Datos del gasto</h2>
 			<a href="{{ layer_url() }}gastos" class="float-left"><button class="btn btn-lg btn-primary ml-3"><i class="fa fa-arrow-left"></i></button></a>
 		</div>
 	</div>
@@ -36,6 +36,7 @@
 					</select>
 				</div>
 				{!!	$expense->getInput(['param'=>'date','placeholder'=>'Fecha']) !!}	
+				{!!	$expense->getInput(['param'=>'base','placeholder'=>'Código o numeración']) !!}
 			</form>
 		</div>
 	</div>
@@ -43,9 +44,36 @@
 	<div class="row mt-3 mb-1">
 		<div class="col-12">
 			<h2 class="float-left">Conceptos</h2>
+			<button class="btn btn-lg btn-primary ml-3" data-toggle="modal" data-target="#addItem"><i class="fa fa-plus"></i></button>
 		</div>
 	</div>	
 	
+	<div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Añadir concepto</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<form method="post" class="data-validation">
+				<div class="modal-body mx-3">
+					<div class="md-form mb-2">
+						<input type="hidden" name="_token" value="{{ csrf_token() }}">	
+						<input type="hidden" name="_action" value="create-item">							
+						<input type="text" class="form-control" id="item[name]" name="item[name]" placeholder="Nombre" data-rule-required="true" maxlength="32" data-rule-maxlength="32" data-label="Nombre del concepto">
+						<input type="text" class="form-control input-mask-money" id="item[base]" name="item[base]" placeholder="Base imponible" data-rule-required="true" maxlength="12"  data-rule-maxlength="12" data-label="Base imponible del concepto">
+					</div>
+				</div>
+				<div class="modal-footer d-flex justify-content-center">
+					<button class="btn btn-lg btn-primary w100">Añadir concepto</button>
+				</div>
+				</form>
+			</div>
+		</div>
+	</div>
+		
 	<div class="row mt-1">		
 		<div class="col-12">
 			<table class="table table-striped table-bordered table-hover table-checkable" data-datatable-filter="false" data-datatable="true" data-datatable-plural="conceptos" style="width:100%">
@@ -53,6 +81,8 @@
 					<tr>
 						<th>Concepto</th>
 						<th>Base</th>
+						<th>Impuestos</th>
+						<th>Total</th>						
 						<th>Acciones</th>
 					</tr>
 				</thead>
@@ -61,12 +91,14 @@
 						<tr>
 							<td>{{ $item->name }}</td>
 							<td>{{ number_format($item->base,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
-							<td data-no-href="true">
+							<td>{{ number_format($item->taxes,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
+							<td>{{ number_format($item->total,2,",",".") }}{{ config('layer')->currency->symbol }}</td>							
+							<td>
 								<button class="btn btn-xs btn-primary pull-center deleteButton" 
 								data-type="error" 
 								data-title="¿Estás seguro de querer eliminarlo?" 
 								data-message="El concepto será eliminado"
-								data-model="invoice_item"
+								data-model="invoice_items"
 								data-id="{{$item->id}}"
 								><i class="fa fa-trash"></i></button>
 							</td>	

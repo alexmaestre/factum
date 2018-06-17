@@ -91,6 +91,10 @@ tr[data-href] td{
   color: white;
 }
 
+.sidebar-nav li.active{
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
 .sidebar-nav li:hover {
   text-decoration: none;
   color: white;

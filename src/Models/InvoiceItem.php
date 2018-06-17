@@ -62,16 +62,16 @@ class InvoiceItem extends \VivaCMS\Models\Model
 				"maxLength" => 128,
 			],
 			"base" => [
-				"type" => "text",
+				"type" => "money",
 				"maxLength" => 12,
-				"masks" => ["coordinate"]
+				"masks" => ["money"]
 			]	
 		],
 		"validation" => [
 			"rules" => [
 				"invoice_id" => 'bail|required|exists:invoices,id',
 				"name" => 'bail|required|max:128',
-				"base" => 'bail|required|regex:/^\d*(\.,\d{1,4})?$/|min:0'
+				"base" => 'bail|required|regex:/^\d*([.,]\d{1,4})?$/|min:0'
 			],
 			"messages" => [
 				"invoice_id.required" => 'Se debe indicar la factura a la cual se asocia el concepto',
@@ -94,5 +94,46 @@ class InvoiceItem extends \VivaCMS\Models\Model
 	{
         return $this->belongsTo(Invoice::class);
     }
+	
+    /**
+     * Cuota Accesor
+     *
+     * @return Float
+     */
+    public function getTaxesAttribute()
+	{
+        return  $this->base * ($this->invoice->receiver->vat->value/100);
+    }	
+	
+    /**
+     * Total Accesor
+     *
+     * @return string
+     */
+    public function getTotalAttribute()
+	{
+        return $this->base + $this->taxes;
+    }	
+
+    /**
+     * Boot events
+     *
+     */
+    public static function boot()
+    {
+        parent::boot();
+		
+        self::created(function($model){
+			$model->invoice->recalculate();
+        });		
+		
+        self::updated(function($model){
+			$model->invoice->recalculate();
+        });
+
+        self::deleted(function($model){
+			$model->invoice->recalculate();	
+        });
+    }	
 	
 }

@@ -27,8 +27,8 @@
 				{!!	$income->getInput(['param'=>'name','placeholder'=>'Nombre']) !!}
 				{!!	$income->getInput(['param'=>'code','placeholder'=>'Código o numeración']) !!}
 				<div class="input-icon input-group right mb-2">
-					<label for="invoice[company_id]" class="sr-only">Cliente</label>
-					<select class="form-control select2" id="invoice[company_id]" name="invoice[company_id]">
+					<label for="invoice[receiver_company_id]" class="sr-only">Cliente</label>
+					<select class="form-control select2" id="invoice[receiver_company_id]" name="invoice[receiver_company_id]">
 						<option value="">Seleccionar cliente</option>
 						@foreach($company->customers as $customer)
 						<option value="{{$customer->id}}" @if($customer->id == $income->receiver_company_id) selected @endif>{{$customer->reference}}</option>

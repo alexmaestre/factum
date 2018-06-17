@@ -17,10 +17,9 @@
 		</div>
 	</div>
 	
-	@if($expenses->count() > 0)
 	<div class="row">		
 		<div class="col-12">
-			<table class="table table-striped table-bordered table-hover table-checkable" data-datatable="true" data-datatable-plural="proveedores" data-datatable-length="500" style="width:100%">
+			<table class="table table-striped table-bordered table-hover table-checkable" data-datatable="true" data-datatable-plural="gastos" data-datatable-length="50" data-datatable-order='[4,"desc"]'>
 				<thead>
 					<tr>
 						<th>Factura</th>					
@@ -41,25 +40,18 @@
 							<td>{{ $expense->company->reference }}</td>
 							<td>{{ $expense->name }}</td>
 							<td>{{ $expense->items->count() }}</td>
-							<td>{{ $expense->date->format(config('layer')->language->date_format) }}</td>
+							<td data-order="{{ strtotime($expense->date) }}">{{ $expense->date->format(config('layer')->language->date_format) }}</td>
 							<td>{{ number_format($expense->base,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
 							<td>{{ number_format($expense->taxes,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
 							<td>{{ number_format($expense->total,2,",",".") }}{{ config('layer')->currency->symbol }}</td>
 							<td data-no-href="true">
-							@if($expense->items->isEmpty()) 
-								<button class="btn btn-xs btn-primary pull-center deleteButton" 
-								data-type="error" 
-								data-title="¿Estás seguro de querer eliminarlo?" 
-								data-message="El gasto será eliminado y todos sus datos desaparecerán"
-								data-model="invoices"
-								data-id="{{$expense->id}}"
-								><i class="fa fa-trash"></i></button>
-							@else
-								<button class="btn btn-xs btn-danger pull-center disabledDeleteButton" 
-								data-title="Acción no permitida"
-								data-message="Este gasto no puede borrarse porque tiene items asociados">
-								<i class="fa fa-trash"></i></button>
-							@endif
+							<button class="btn btn-xs btn-primary pull-center deleteButton" 
+							data-type="error" 
+							data-title="¿Estás seguro de querer eliminarlo?" 
+							data-message="El gasto será eliminado y todos sus datos desaparecerán"
+							data-model="invoices"
+							data-id="{{$expense->id}}"
+							><i class="fa fa-trash"></i></button>
 							</td>	
 						</tr>
 					@endforeach
@@ -67,9 +59,6 @@
 			</table>
 		</div>
 	</div>
-	@else
-		Su empresa no tiene gastos registrados
-	@endif
 	
 @stop
 

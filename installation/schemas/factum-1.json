@@ -125,19 +125,22 @@
 						"name" : "base",
 						"type" : "decimal",
 						"size" : 10,
-						"decimals" : 4
+						"decimals" : 4,
+						"default" : 0
 					},
 					{
 						"name" : "taxes",
 						"type" : "decimal",
 						"size" : 10,
-						"decimals" : 4
+						"decimals" : 4,
+						"default" : 0
 					},
 					{
 						"name" : "total",
 						"type" : "decimal",
 						"size" : 10,
-						"decimals" : 4
+						"decimals" : 4,
+						"default" : 0
 					},
 					{
 						"name" : "status",
@@ -176,7 +179,7 @@
 					}				
 				],
 			"timestamps" : false,
-			"foreign_key" : [["invoice_id","id","invoices"]]
+			"foreign_key" : [["invoice_id","id","invoices","cascade"]]
 		}
 	]
 }

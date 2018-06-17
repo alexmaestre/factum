@@ -43,20 +43,41 @@ class Expenses extends Controller{
     }	
 	
     /**
-     * Provider store operation
+     * Expense post operations (delete and create item)
+     *
+     * @return Response
+     */
+    public function post($id,Request $request)
+    {
+		if($request->get('_action') == 'create-item'){
+			$i = new InvoiceItemController();
+			$m = array_merge($request->get('item'),["invoice_id" => $id]);
+			$create = $i->createObject($i->model,$m);
+			if($create === false){ 
+				return back()->withErrors($i->error)->withInput();
+			};
+			return redirect(layer_url().'gasto/'.$id);
+		}
+		if($request->get('_action') == 'delete-item'){
+			echo 'delete-item';
+		}
+    }	
+	
+    /**
+     * Expense store operation
      *
      * @return Response
      */
     public function store(Request $request)
     {
-		$c = new CompanyController();
-		$create = $c->createObject($c->model,$request->get('company'));
+		$i = new InvoiceController();
+		$c = Company::where('user_id',\Auth::user()->id)->first();
+		$m = array_merge($request->get('invoice'),["receiver_company_id" => $c->id]);
+		$create = $i->createObject($i->model,$m);
 		if($create === false){ 
-			return back()->withErrors($c->error)->withInput();
+			return back()->withErrors($i->error)->withInput();
 		};	
-		$userCompany = Company::where('user_id',\Auth::user()->id)->first();
-		$userCompany->providers()->attach($create->id);
-		return redirect(layer_url().'proveedores');	
+		return redirect(layer_url().'gasto/'.$create->id);
     }		
 	
 	
