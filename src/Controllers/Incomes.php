@@ -89,12 +89,12 @@ class Incomes extends Controller{
 			if($create === false){ 
 				return back()->withErrors($i->error)->withInput();
 			};
-			return redirect();
+			return redirect()->back();
 		}
 		if($request->get('_action') == 'delete-item'){
 			$i = InvoiceItem::find($request->get('item'));
 			$i->delete();
-			return redirect();
+			return redirect()->back();
 		}
     }	
 	
